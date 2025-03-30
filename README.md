@@ -8,7 +8,7 @@
 </p>
 
 # Coleweight
-Github for:
+New main github for:
 https://www.chattriggers.com/modules/v/Coleweight
 ## Install
 - Do /ct import coleweight
