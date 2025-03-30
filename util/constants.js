@@ -13,8 +13,6 @@ let PogData = new PogObject("Coleweight", {
     "itemStringed": "",
     "museum": [],
     "currentPet": "",
-    "currentAbility":"",
-    "currentSkymall":"",
     "effMinerEnabled": false,
     "coleweightGui": {
         "x": 0.5,
@@ -124,11 +122,11 @@ register("gameLoad", () => {
     })
 })
 
+
 register("chat", (lvl, pet, event) => {
     constants.data.currentPet = pet.toLowerCase()
     constants.data.save()
 }).setCriteria(/&cAutopet &eequipped your &.\[Lvl ([0-9]+)] &.([a-zA-Z]+)&e! &a&lVIEW RULE&r/g)
-
 
 
 register("chat", (message, pet, event) => {

@@ -23,11 +23,10 @@ registerWhen(register("step", () => {
 
 registerWhen(register("renderEntity", (entity, position, partialTicks, event) => {
     entity = entity.getEntity();
-    const CTEntity = new Entity(entity);
     if(entity instanceof EntitySlime)
         cancel(event);
     else if (entity instanceof EntityArmorStand &&
-        CTEntity.getName().includes("Sludge")
+        entity.getName().includes("Sludge") // getName
     )
         cancel(event);
 }), () => { return sludgesInvisible && !settings.debug })
