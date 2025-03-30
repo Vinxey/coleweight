@@ -6,8 +6,3 @@
     <img src="https://img.shields.io/discord/1022926524736872458?color=55AA55&label=discord&style=for-the-badge&labelColor=555555" />
 </a>
 </p>
-
-# Coleweight
-Beta version of coleweight module things might be broken here if so dm me on discord @vinxey
-## Install
-- Do /ct import coleweight
