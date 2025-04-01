@@ -11,4 +11,5 @@ register("chat", (Skymall) => {
     ]
     if (!possible_perks.includes(Skymall)) return
     constants.data.currentSkymall = Skymall
+    constants.data.save()
 }).setCriteria(/New buff: (.*?)\.$/g)
