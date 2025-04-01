@@ -5,9 +5,6 @@ import constants from "../util/constants"
 import { load } from "./ordered"
 const PREFIX = constants.PREFIX
 
-if(!FileLib.exists("Coleweight", "config/routes.json"))
-    FileLib.write("Coleweight", "config/routes.json", FileLib.read("Coleweight", "data/defaultroutes"))
-
 registerCommand({
     aliases: ["import"],
     description: "Import waypoints into Skytils.",
