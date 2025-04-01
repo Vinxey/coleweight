@@ -1,3 +1,4 @@
+# Main version -> [here](https://github.com/Vinxey/coleweight/tree/mainV)
 ## Beta version of coleweight
 Things here may not fully work if so dm me on discord @vinxey
 ## ToDo list
