@@ -14,6 +14,9 @@ class Settings {
         this.initialize(this);
         this.setCategoryDescription("General", `&aColeweight &bv${JSON.parse(FileLib.read("Coleweight", "metadata.json")).version}` + 
         `\n&aBy &bNinjune`)
+        this.addDependency("Glacite Tunnels", "Commission Location Hider")
+        this.addDependency("Dwarven Mines", "Commission Location Hider")
+        this.addDependency("Crystal Hollows", "Commission Location Hider")
     }
     // CAT General
     // SUBCAT Discord
@@ -345,20 +348,6 @@ class Settings {
         category: "Gui"
     })
     commissionGui = false;
-    @SwitchProperty({
-         name: "Percents",
-        description: "Changes formatting to percents rather than exact amounts",
-        subcategory: "Commissions",
-        category: "Gui"
-    })
-    commissionPercents = true;
-    @SwitchProperty({
-        name: "toggle shaft commission visibility",
-       description: "Makes it so that mineshaft commissions only show while in a mineshaft",
-       subcategory: "Commissions",
-       category: "Gui"
-   })
-   hideShaftComms = true;
     @ButtonProperty({
         name: "Change commission gui position",
         description: "Move the location of the commission gui.",
@@ -369,6 +358,48 @@ class Settings {
     movecommissionLocation(){
         ChatLib.command("cw move commissiongui", true);
     }
+    @SwitchProperty({
+       name: "toggle shaft commission visibility",
+       description: "Makes it so that mineshaft commissions only show while in a mineshaft",
+       subcategory: "Commissions",
+       category: "Gui"
+   })
+    hideShaftComms = true;
+    @SwitchProperty({
+        name: "Percents",
+        description: "Changes formatting to percents rather than exact amounts",
+        subcategory: "Commissions",
+        category: "Gui"
+    })
+    commissionPercents = true;
+    @SwitchProperty({
+        name: "Commission Location Hider",
+        description: "Choose which areas you want the commission gui to show up in",
+        subcategory: "Commissions",
+        category: "Gui"
+    })
+    commLocationCheck = false;
+    @SwitchProperty({
+        name: "Crystal Hollows",
+        description: "toggles seeing commissions while in the Crystal Hollows",
+        subcategory: "Commissions",
+        category: "Gui"
+    })
+    commLocationCH = true;
+    @SwitchProperty({
+        name: "Dwarven Mines",
+        description: "toggles seeing commissions while in the Dwarven Mines",
+        subcategory: "Commissions",
+        category: "Gui"
+    })
+    commLocationDM = true;
+    @SwitchProperty({
+        name: "Glacite Tunnels",
+        description: "toggles seeing commissions while in the Glacite Tunnels (including mineshafts)",
+        subcategory: "Commissions",
+        category: "Gui"
+    })
+    commLocationGT = true;
     //SUBCAT Mining Test
     @SwitchProperty({
         name: "Mining Test gui",

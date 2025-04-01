@@ -214,7 +214,7 @@ export class Title
         return this.drawing
     }
 }
-
+zyxw = ''
 // could move below to it's own file or do something else
 class LocationChecker
 {
@@ -247,7 +247,11 @@ class LocationChecker
                 for(let locationsIndex = 0; locationsIndex < this.locations.length; locationsIndex++)
                 {
                     if(this.scoreboard[lineIndex].toString().includes(this.locations[locationsIndex]))
-                    {
+                    {   
+                        if (zyxw != this.scoreboard[lineIndex].toString()){
+                            zyxw = this.scoreboard[lineIndex].toString()
+                        }
+                        
                         this.state = true
                         return this.state
                     }
@@ -258,6 +262,7 @@ class LocationChecker
         }
         else
             return this.state
+        
     }
 }
 
@@ -269,7 +274,7 @@ export const mirroverseCheck = new LocationChecker(["§fMirrorver"])
 export const mineshaftCheck = new LocationChecker(["shaft"])
 export const gardenCheck = new LocationChecker(["Garde"])
 export const gunpowderCheck = new LocationChecker(["§bGunpowder"])
-export const gtChecker = new LocationChecker(["Base"])
+export const gtChecker = new LocationChecker(["§6ase Camp","§bunnels"])
 /**
  * Use to delete files that have been deleted and cause an incompatibility in the next CT version.
  * @param {String} path

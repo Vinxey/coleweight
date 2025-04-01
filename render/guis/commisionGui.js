@@ -1,6 +1,6 @@
 import { registerGui } from "../../guiManager"
 import { BaseGui } from "../BaseGui"
-import {dwarvenChecker, hollowsChecker, mineshaftCheck} from "../../util/helperFunctions"
+import {dwarvenChecker, hollowsChecker, mineshaftCheck,gtChecker} from "../../util/helperFunctions"
 import constants from "../../util/constants"
 import settings from "../../settings"
 //comms that require a mineshaft
@@ -15,12 +15,24 @@ thousandComms = ['Gemstone Collector','Hard Stone'] //
 thirteenComms = ['Yog','Automaton','Team Treasurite']
 
 const PREFIX = constants.PREFIX
-delayIterator = 10
+delayIterator = 100
 meow = true
+
+/*
+commLocationCheck = false;
+commLocationCH = true;
+commLocationDM = true;
+commLocationGT = true;
+*/
 const commissionGui = new BaseGui(["commissionGui"], () =>
+
 {
     if (!checkAreas() || !settings.commissionGui) {return}
-
+    if (settings.commLocationCheck){
+        if(!settings.commLocationCH && hollowsChecker.check()){return}
+        if(!settings.commLocationGT && (gtChecker.check() || mineshaftCheck.check())){return}
+        if(!settings.commLocationDM && (!gtChecker.check() && dwarvenChecker.check())){return}
+    }
     message = getcommissions()
 
     return message
