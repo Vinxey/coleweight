@@ -39,23 +39,25 @@ registerCommand({
                 y = startPos[1],
                 z = startPos[2]
 
-                yogWaypoints.push([x + 10, y - 7, z - 27])
-                yogWaypoints.push([x + 10, y - 7, z - 27])
-                yogWaypoints.push([x + 28, y - 8, z + 15])
-                yogWaypoints.push([x - 41, y - 3, z + 26])
-                yogWaypoints.push([x - 32, y - 3, z + 45])
-                yogWaypoints.push([x - 22, y - 3, z - 34])
-                yogWaypoints.push([x + 28, y - 8, z + 36])
-                yogWaypoints.push([x - 47, y - 3, z + 32])
-                yogWaypoints.push([x - 43, y - 1, z + 4])
-                yogWaypoints.push([x - 47, y + 2, z - 20])
-                yogWaypoints.push([x + 11, y - 13, z + 40])
-                yogWaypoints.push([x + 15, y - 13, z + 43])
-                yogWaypoints.push([x - 44, y + 2, z - 29])
-                yogWaypoints.push([x + 33, y - 4, z - 15])
-                yogWaypoints.push([x - 6, y - 4, z - 34])
-                yogWaypoints.push([x + 19, y - 12, z + 35])
-                yogWaypoints.push([x + 16, y - 9, z - 15])
+                yogWaypoints = [
+                    [x+10, y-7, z-27],
+                    [x+10, y-7, z-27],
+                    [x+28, y-8, z+15],
+                    [x-41, y-3, z+26],
+                    [x-32, y-3, z+45],
+                    [x-22, y-3, z-34],
+                    [x+28, y-8, z+36],
+                    [x-47, y-3, z+32],
+                    [x-43, y-1, z+4],
+                    [x-47, y+2, z-20],
+                    [x+11, y-13, z+40],
+                    [x+15, y-13, z+43],
+                    [x-44, y+2, z-29],
+                    [x+33, y-4, z-15],
+                    [x-6, y-4, z-34],
+                    [x+19, y-12, z+35],
+                    [x+16, y-9, z-15]
+                ];
                 ChatLib.chat(`${PREFIX}&b${WAYPOINTNAME} waypoints turned on!`)
             }
             else

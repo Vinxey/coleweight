@@ -66,32 +66,17 @@ export default registerCommand({
 })
 
 function resetpbs(){
-    constants.pbs["Coal"] = 0
-    constants.pbs["Cobblestone"] = 0
-    constants.pbs["Diamond"] = 0
-    constants.pbs["Emerald"] = 0
-    constants.pbs["End Stone"] = 0
-    constants.pbs["Glacite"] = 0
-    constants.pbs["Glossy Gemstone"] = 0
-    constants.pbs["Glowstone Dust"] = 0
-    constants.pbs["Gold Ingot"] = 0
-    constants.pbs["Hard Stone"] = 0
-    constants.pbs["Ice"] = 0
-    constants.pbs["Iron Ingot"] = 0
-    constants.pbs["Lapis Lazuli"] = 0
-    constants.pbs["Mithril"] = 0
-    constants.pbs["Mycelium"] = 0
-    constants.pbs["Netherrack"] = 0
-    constants.pbs["Nether Quartz"] = 0
-    constants.pbs["Obsidian"] = 0
-    constants.pbs["Red Sand"] = 0
-    constants.pbs["Redstone"] = 0
-    constants.pbs["Refined Mineral"] = 0
-    constants.pbs["Sand"] = 0
-    constants.pbs["Sludge Juice"] = 0
-    constants.pbs["Titanium"] = 0
-    constants.pbs["Tungsten"] = 0
-    constants.pbs["Umber"] = 0
-    constants.pbs.save()
+    const collections = [
+        "Coal", "Cobblestone", "Diamond", "Emerald", "End Stone", "Glacite",
+        "Glossy Gemstone", "Glowstone Dust", "Gold Ingot", "Hard Stone", "Ice",
+        "Iron Ingot", "Lapis Lazuli", "Mithril", "Mycelium", "Netherrack",
+        "Nether Quartz", "Obsidian", "Red Sand", "Redstone", "Refined Mineral",
+        "Sand", "Sludge Juice", "Titanium", "Tungsten", "Umber"
+    ];
 
+    collections.forEach(collection => {
+        constants.pbs[collection] = 0;
+    });
+
+    constants.pbs.save()
 }
