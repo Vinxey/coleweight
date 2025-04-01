@@ -672,25 +672,6 @@ class Settings {
     moveGyroLocation() {
         ChatLib.command("cw move gyro", true);
     }
-    // SUBCAT Rift
-    @SwitchProperty({
-        name: "Dance Helper",
-        description: "Shows what you need to do for the dance. Should have the right timing. Cancels the normal title.",
-        subcategory: "Rift",
-        category: "Other"
-    })
-    danceTracker = false;
-
-    @ButtonProperty({
-        name: "Change Dance Position",
-        description: "Move the location of the dance gui.",
-        subcategory: "Rift",
-        category: "Other",
-        placeholder: "Open"
-    })
-    moveDanceLocation() {
-        ChatLib.command("cw move dance", true);
-    }
     // SUBCAT UYOR
     @SwitchProperty({
         name: "Corpse Finder",
