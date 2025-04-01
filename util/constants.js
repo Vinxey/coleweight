@@ -5,7 +5,6 @@ import { updateRegisters } from "./helperFunctions"
 
 
 let PogData = new PogObject("Coleweight", {
-    "api_key": "",
     "professional": 0,
     "jungle_amulet": true,
     "first_time": true,
