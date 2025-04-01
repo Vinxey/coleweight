@@ -1,7 +1,6 @@
 import settings from "../settings"
 import constants from "../util/constants"
 import { addCommas, getSelectedProfile } from "../util/helperFunctions"
-import { findCost, findHotmObject } from "../commands/calculate/hotmCalc"
 import { findTick } from "../commands/calculate/tick"
 const NBTTagString = Java.type("net.minecraft.nbt.NBTTagString")
 let powderTotals = {}
@@ -85,28 +84,6 @@ register("itemTooltip", (lore, item) => {
         constants.data.professional = parseInt(item.getLore()[1].replace("§5§o§7Level ", ""))
     else return
     constants.data.save()
-})
-
-register("itemTooltip", (lore, item) => { // powder put into each perk
-    if(!settings.showPowderSum || !item.getLore()[1]?.startsWith("§5§o§7Level ") || item?.getLore()[1]?.includes("💀")) return
-    new Thread(() => {
-        if(item.getLore()[1].includes("💀") || item.getLore()[1] == undefined) return
-        const list = new NBTTagList(item.getNBT().getCompoundTag("tag").getCompoundTag("display").getTagMap().get("Lore"))
-        let perk = item.getLore()[0].replace(/§.|\(.+\)/g, "").replace(/ /g, "")
-        let level = /Level (\d+)/g.exec(item.getLore()[1])[1]
-        let hotmObjectToFind = findHotmObject(perk)
-        if(hotmObjectToFind == undefined || (hotmObjectToFind.costFormula == undefined && perk != "Fortunate")) return
-
-        let powderSum
-
-        if(perk == "Fortunate")
-            powderSum = findCost(undefined, 2, parseInt(level), true)
-        else
-            powderSum = findCost(perk, 2, parseInt(level))
-
-        if(item.getLore()[1].includes("💀")) return
-        list.set(0, new NBTTagString(item.getLore()[1] + ` §7(§b${addCommas(Math.round(powderSum))} §l${Math.round(powderSum/powderTotals[hotmObjectToFind.powderType]*100)}%§7)💀`)) // this is a perfect solution no cap
-    }).start()
 })
 
 register("step", () => {

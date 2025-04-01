@@ -463,14 +463,6 @@ class Settings {
     })
     gemstoneMiningStats = true;
 
-    @SwitchProperty({
-        name: "Show powder sum",
-        description: "Shows powder sum in HOTM menu.",
-        subcategory: "Stats",
-        category: "Stats"
-    })
-    showPowderSum = false;
-
     @SelectorProperty({
         name: "Tick speed block",
         description: "Sets the tick speed block on player profile.",
