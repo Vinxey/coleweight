@@ -366,7 +366,7 @@ class Settings {
         category: "Gui",
         placeholder: "Open"
     })
-    moveSkymallLocation(){
+    movecommissionLocation(){
         ChatLib.command("cw move commissiongui", true);
     }
     //SUBCAT Mining Test
