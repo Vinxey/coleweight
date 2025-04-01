@@ -1,4 +1,3 @@
-// basis: https://github.com/Skytils/SkytilsMod/blob/293ebf80522daf105da19ddb8ad27fa4fc5f9af9/src/main/kotlin/gg/skytils/skytilsmod/features/impl/mining/MiningFeatures.kt#L364 & nwjn esps: matcho + corpse
 import settings from "../settings";
 import { gunpowderCheck, registerWhen } from "../util/helperFunctions";
 import { drawEspBox } from "../util/renderUtil"

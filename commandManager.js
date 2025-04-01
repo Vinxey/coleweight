@@ -53,7 +53,7 @@ register("command", (...args) => {
 }).setName("cw").setAliases(["coleweight"])
 
 
-register("command", (...args) => {
+/*register("command", (...args) => {
    ChatLib.command(`cw fetchdiscord ${args[0]}`, true)
 }).setTabCompletions((args) => {
     let players = World.getAllPlayers().map((p) => p.getName())
@@ -63,7 +63,7 @@ register("command", (...args) => {
     .sort()
 
     return players
-}).setName("fetchdiscord").setAliases(["fdiscord"])
+}).setName("fetchdiscord").setAliases(["fdiscord"])*/
 
 
 function findTabOutput(input, options)
@@ -91,7 +91,6 @@ import "./commands/coords/spiral"
 import "./commands/coords/temple"
 import "./commands/coords/throne"
 import "./commands/coords/yog"
-
 import "./commands/calculate.js"
 import "./commands/config"
 import "./commands/coords.js"
@@ -99,7 +98,6 @@ import "./commands/credits"
 import "./commands/cw"
 import "./commands/deleteroute"
 import "./commands/drawLine"
-import "./commands/fetchDiscord"
 import "./commands/gemstone"
 import "./commands/help"
 import "./commands/import"
@@ -114,9 +112,7 @@ import "./commands/quickswitch"
 import "./commands/rankcolor"
 import "./commands/reload"
 import "./commands/resetabilities"
-import "./commands/setkey"
 import "./commands/stopwatch"
 import "./commands/structure"
 import "./commands/timer"
-import "./commands/track"
 import "./commands/waypoints"

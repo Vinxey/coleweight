@@ -67,7 +67,7 @@ register("chat", () => {
 
 
 register("guiClosed", (gui) => {
-    if(gui.toString().includes("GuiChat") || Player.getContainer()?.getName() != "container") // closed menu
+    if(Player.getContainer()?.getName() != "container" || gui.toString().includes("GuiChat")) // closed menu
         return;
     page = 0;
     clickedAbility = false;

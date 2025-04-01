@@ -1,3 +1,4 @@
 .vs
 config/*
+!config/routes.json
 !config/.gitkeep

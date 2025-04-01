@@ -5,7 +5,6 @@ import { updateRegisters } from "./helperFunctions"
 
 
 let PogData = new PogObject("Coleweight", {
-    "api_key": "",
     "miningXP": 0,
     "professional": 0,
     "jungle_amulet": true,
@@ -185,11 +184,11 @@ register("gameLoad", () => {
     })
 })
 
+
 register("chat", (lvl, pet, event) => {
     constants.data.currentPet = pet.toLowerCase()
     constants.data.save()
 }).setCriteria(/&cAutopet &eequipped your &.\[Lvl ([0-9]+)] &.([a-zA-Z]+)&e! &a&lVIEW RULE&r/g)
-
 
 
 register("chat", (message, pet, event) => {

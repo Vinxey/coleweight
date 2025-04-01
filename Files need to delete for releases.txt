@@ -1,4 +1,4 @@
-all of config/ except .gitkeep
+all of config/ except routes.json
 .git
 License
 README.md
