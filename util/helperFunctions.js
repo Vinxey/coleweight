@@ -269,7 +269,7 @@ export const mirroverseCheck = new LocationChecker(["§fMirrorver"])
 export const mineshaftCheck = new LocationChecker(["shaft"])
 export const gardenCheck = new LocationChecker(["Garde"])
 export const gunpowderCheck = new LocationChecker(["§bGunpowder"])
-
+export const gtChecker = new LocationChecker(["Base"])
 /**
  * Use to delete files that have been deleted and cause an incompatibility in the next CT version.
  * @param {String} path

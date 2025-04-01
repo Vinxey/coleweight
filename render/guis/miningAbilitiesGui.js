@@ -6,6 +6,11 @@ import constants from "../../util/constants"
 
 //initializes ability from data  
 activeAbilities = undefined
+addAbility(constants.data.currentAbility, 0)
+
+
+//initializes ability from data  
+activeAbilities = undefined
 addAbility(constants.data.currentAbility, 0) 
 const miningAbilitiesGui = new BaseGui(["abilityGui", "miningabilities"], () => {
     if(!checkAreas() || constants.data.currentAbility == "") // had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
@@ -53,34 +58,7 @@ register("step", () => {
  
 
 //gets skymall and saves it to data could be used for other things also but mainly just doing for 20% cooldown reduction thing
-register("chat", (Skymall) => {
-    switch (Skymall){
-        case "-20% Pickaxe Ability cooldowns":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "Gain +100⸕ Mining Speed":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "Gain +50☘ Mining Fortune":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "Gain +15% more Powder while mining":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "Gain 5x Titanium drops":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "10x chance to find Golden and Diamond Goblins":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-    }
-}).setCriteria(/New buff: (.*?)\.$/g)
+
 
 //gets ability through you used your {ability name} message
 register("chat", (abilityName) =>{
@@ -137,7 +115,6 @@ function addAbility(abilityName, timer = 0)
     } else{
         Skymall = false
     }
-    //print(timer)
     //if the timer has finished set the new timer based on buffs
     if (timer <= 0) {
         let multiplier = 1
@@ -174,13 +151,11 @@ function addAbility(abilityName, timer = 0)
     //if this is first check apply default attributes and create object
     if (!found)
     {
-        //print(object)
         let object = {timer, name: abilityName, title: new Title({text: `&6[&3&kd&6] &b&l${abilityName}&6 [&3&kd&6]`})}
         activeAbilities = (object)
         drawTimestamp = timer
         activeAbilities.title.drawState = 0
         activeAbilities.timer = timer
-        //print(activeAbilities.timer)
     }
     
     

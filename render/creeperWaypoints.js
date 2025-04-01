@@ -3,13 +3,11 @@ import settings from "../settings";
 import { gunpowderCheck, registerWhen } from "../util/helperFunctions";
 import { drawEspBox } from "../util/renderUtil"
 
-let waypoints = []
-let coordsRows = FileLib.read("Coleweight", "data/creepers.txt").split("\n")
-coordsRows.forEach(unsplitRow => {
-    let row = unsplitRow.split(" ")
-    waypoints.push([parseInt(row[0]) + 0.5, parseInt(row[1]), parseInt(row[2]) + 0.5])
-})
 
+
+waypoints=
+[[-10,152,27],[-11,154,4],[4,151,-14],[24,156,-35],[-10,153,-31],[26,151,-6],[6,157,8],[-35,155,9],[-26,154,-12]
+]
 registerWhen(register("renderWorld", () => {
     waypoints.forEach(wp => {
         drawEspBox(wp[0], wp[1], wp[2], 1, 1, 0, 0.7, 0.7, 1, true)

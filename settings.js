@@ -365,6 +365,93 @@ class Settings {
         category: "Gui"
     })
     muteMetalDetectorSound = false;
+    //SUBCAT Skymall Gui
+    @SwitchProperty({
+        name: "Skymall gui",
+        description: "Toggles Skymall gui.",
+        subcategory: "Skymall",
+        category: "Gui"
+    })
+    skymallGui = false;
+
+    @ButtonProperty({
+        name: "Change skymall gui position",
+        description: "Move the location of the skymall gui.",
+        subcategory: "Skymall",
+        category: "Gui",
+        placeholder: "Open"
+    })
+    moveSkymallLocation(){
+        ChatLib.command("cw move skymallgui", true);
+    }
+    //SUBCAT Commission Gui
+    @SwitchProperty({
+        name: "Commission gui",
+        description: "Toggles Commission gui.",
+        subcategory: "Commissions",
+        category: "Gui"
+    })
+    commissionGui = false;
+    @SwitchProperty({
+         name: "Percents",
+        description: "Changes formatting to percents rather than exact amounts",
+        subcategory: "Commissions",
+        category: "Gui"
+    })
+    commissionPercents = true;
+    @SwitchProperty({
+        name: "toggle shaft commission visibility",
+       description: "Makes it so that mineshaft commissions only show while in a mineshaft",
+       subcategory: "Commissions",
+       category: "Gui"
+   })
+   hideShaftComms = true;
+    @ButtonProperty({
+        name: "Change commission gui position",
+        description: "Move the location of the commission gui.",
+        subcategory: "Commissions",
+        category: "Gui",
+        placeholder: "Open"
+    })
+    moveSkymallLocation(){
+        ChatLib.command("cw move commissiongui", true);
+    }
+    //SUBCAT Mining Test
+    @SwitchProperty({
+        name: "Mining Test gui",
+        description: "Toggles Mining Test gui.",
+        subcategory: "MiningTest",
+        category: "Gui"
+    })
+    miningtestgui = false;
+
+    @TextProperty({
+        name: "Test Start Countdown",
+        description: "time in seconds before the test starts",
+        subcategory: "MiningTest",
+        category: "Gui"
+    })
+    testCountdown = "5";
+
+    @SwitchProperty({
+        name: "Collection Tracker",
+        description: "if enabled removes test functionality and makes timer tick up instead of down",
+        subcategory: "MiningTest",
+        category: "Gui"
+    })
+    collectionTracker = false
+
+    @ButtonProperty({
+        name: "Change MiningTest gui position",
+        description: "Move the location of the MiningTest gui.",
+        subcategory: "MiningTest",
+        category: "Gui",
+        placeholder: "Open"
+    })
+    moveMiningTestLocation(){
+        ChatLib.command("cw move miningtestgui", true);
+    }
+
     // SUBCAT Mining Abilities
     @SwitchProperty({ 
         name: "Mining abilities",
