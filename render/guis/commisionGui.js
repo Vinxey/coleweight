@@ -1,6 +1,6 @@
 import { registerGui } from "../../guiManager"
 import { BaseGui } from "../BaseGui"
-import {dwarvenChecker, endChecker, hollowsChecker, mineshaftCheck, gtChecker} from "../../util/helperFunctions"
+import {dwarvenChecker, hollowsChecker, mineshaftCheck} from "../../util/helperFunctions"
 import constants from "../../util/constants"
 import settings from "../../settings"
 //comms that require a mineshaft
