@@ -10,7 +10,7 @@ register('chat', (rank, name) => {
 		ChatLib.command(`party transfer ${name}`)
         partyLeader = name;
 	}
-}).setChatCriteria(/Party > (\[.+\])? ?(.+) ?[ቾ⚒]?: (!|\.|\?)+(ptme|pt)?/)
+}).setChatCriteria(/Party > (\[.+\])? ?(.+) ?[ቾ⚒]?: (!|\.|\?)+(ptme|pt){1}/)
 
 
 register("chat", (rank, name) => {

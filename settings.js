@@ -281,66 +281,19 @@ class Settings {
     // SUBCAT Coleweight Tracker
     @SwitchProperty({
         name: "Coleweight tracker",
-        description: "&4Deprecated &7Enables the Coleweight tracker. (gain coleweight for a few mins for it to show up)",
+        description: "&4Deprecated &7Update Soon!",
         subcategory: "Coleweight Tracker",
         category: "Gui"
     })
     cwToggle = false;
-
-    @ButtonProperty({
-        name: "Change Coleweight tracker position",
-        description: "Move the location of the coleweight tracker.",
-        subcategory: "Coleweight Tracker",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveCwLocation() {
-        ChatLib.command("cw move coleweight", true);
-    }
-
-    @TextProperty({
-        name: "Pass player",
-        description: "Player that you want to pass in Coleweight. Case insensitive. Reload the gui with \"/cw reload coleweight\" after changing this. (leave blank for none)",
-        subcategory: "Coleweight Tracker",
-        category: "Gui"
-    })
-    cwPassPlayer = "";
     // SUBCAT Collection
     @SwitchProperty({
         name: "Collection tracker",
-        description: "&4Deprecated &7Tracks collections ('/cw track (collection)' to set).",
+        description: "&4Deprecated &7 Update soon!",
         subcategory: "Collection",
         category: "Gui"
     })
     collectionTracker = false;
-
-    @SwitchProperty({
-        name: "Collection notation",
-        description: "Changes collection to be abbrivated like '45K' or '2M'.",
-        subcategory: "Collection",
-        category: "Gui"
-    })
-    collectionNotation = true;
-
-    @SwitchProperty({
-        name: "Collection show always",
-        description: "Changes collection tracker to show always.",
-        subcategory: "Collection",
-        category: "Gui"
-    })
-    showCollectionTrackerAlways = false;
-
-    @ButtonProperty({
-        name: "Change collection tracker position",
-        description: "Move the location of the collection tracker.",
-        subcategory: "Collection",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveCollectionLocation() {
-        ChatLib.command("cw move collection", true);
-    }
-
     // SUBCAT Metal Detector Solver
     @SwitchProperty({
         name: "Metal Detector Solver",
@@ -383,12 +336,13 @@ class Settings {
     miningAbilitiesGui = false;
 
     @SwitchProperty({
-        name: "Perfect Fuel Tank",
-        description: "Applies cooldown reduction from perf fuel tank",
+        name: "Mining abilities selected indicator",
+        description: "Tells which ability is selected on the ability gui.",
         subcategory: "Mining Abilities",
         category: "Gui"
     })
-    PerfectFuelTank = false;
+    miningAbilitiesSelectedIndicator = true;
+
     @ButtonProperty({
         name: "Change mining abilities position",
         description: "Move the location of the mining abilities gui.",
@@ -508,14 +462,6 @@ class Settings {
         category: "Stats"
     })
     gemstoneMiningStats = true;
-
-    @SwitchProperty({
-        name: "Show powder sum",
-        description: "Shows powder sum in HOTM menu.",
-        subcategory: "Stats",
-        category: "Stats"
-    })
-    showPowderSum = false;
 
     @SelectorProperty({
         name: "Tick speed block",
@@ -726,29 +672,10 @@ class Settings {
     moveGyroLocation() {
         ChatLib.command("cw move gyro", true);
     }
-    // SUBCAT Rift
-    @SwitchProperty({
-        name: "Dance Helper",
-        description: "Shows what you need to do for the dance. Should have the right timing. Cancels the normal title.",
-        subcategory: "Rift",
-        category: "Other"
-    })
-    danceTracker = false;
-
-    @ButtonProperty({
-        name: "Change Dance Position",
-        description: "Move the location of the dance gui.",
-        subcategory: "Rift",
-        category: "Other",
-        placeholder: "Open"
-    })
-    moveDanceLocation() {
-        ChatLib.command("cw move dance", true);
-    }
     // SUBCAT UYOR
     @SwitchProperty({
         name: "Corpse Finder",
-        description: "&4(Use at Your Own Risk) &7ESP for corpses in glacite mineshafts. Based on Nwjn's version (credit to him). ",
+        description: "&4Depreciated &7 /ct import NwjnAddons for legit version",
         subcategory: "UYOR",
         category: "Other"
     })
@@ -756,7 +683,7 @@ class Settings {
 
     @SwitchProperty({
         name: "Pest Finder",
-        description: "&4(Use at Your Own Risk) &7ESP for pests in garden. Basis: skytils has an esp for corleone features/impl/mining/MiningFeatures.kt#L364. also other mods have player esp (dungeon guide, sba) or box starred enemies (soopy/bettermap).",
+        description: "&4Depreciated",
         subcategory: "UYOR",
         category: "Other"
     })
