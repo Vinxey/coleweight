@@ -43,7 +43,7 @@ register("actionBar", (dist) => {
         return
     let distance = parseFloat(dist)
     if (!baseCoordinates) {
-            Client.showTitle("&ccenter of MoD not set","&ago to center of the crystal on top to set :D",0,40,0)
+            Client.showTitle("&cCenter of MoD not set","&aGo to center of the crystal on top to set",0,40,0)
             let x = ~~(Player.getX());
             let y = ~~(Player.getY());
             let z = ~~(Player.getZ());
