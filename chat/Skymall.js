@@ -1,30 +1,14 @@
 import constants from "../util/constants"
 
 register("chat", (Skymall) => {
-    switch (Skymall){
-        case "-20% Pickaxe Ability cooldowns":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "Gain +100⸕ Mining Speed":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "Gain +50☘ Mining Fortune":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "Gain +15% more Powder while mining":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "Gain 5x Titanium drops":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-        case "10x chance to find Golden and Diamond Goblins":
-        constants.data.currentSkymall = Skymall
-        constants.data.save()
-        break
-    }
+    let possible_perks = [
+        "-20% Pickaxe Ability cooldowns",
+        "Gain +100⸕ Mining Speed",
+         "Gain +50☘ Mining Fortune",
+         "Gain +15% more Powder while mining",
+         "Gain 5x Titanium drops",
+        "10x chance to find Golden and Diamond Goblins",
+    ]
+    if (!possible_perks.includes(Skymall)) return
+    constants.data.currentSkymall = Skymall
 }).setCriteria(/New buff: (.*?)\.$/g)
