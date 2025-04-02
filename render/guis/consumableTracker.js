@@ -73,7 +73,6 @@ register('step',() =>{
 
 registerGui(consumablesGui)
 register('soundPlay', () =>{
-    print(i)
     if (i == 0){
     item = Player.getHeldItem()
     if (item != null){
