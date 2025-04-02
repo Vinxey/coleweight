@@ -10,7 +10,6 @@ export default registerCommand({
     options: ["(start, reset, set, resetpbs)"],
     subcommands: [["start", "reset","set","resetpbs"]],
     execute: (args) => {
-        let timer = constants.data.timerGui.timer
         if(args[1] == undefined)
             return ChatLib.chat(`${constants.PREFIX}&bOptions are: &3start&b, &3reset&b, &3set&b, &3resetpbs&b.`)
         if (args[1].toLowerCase() == "set"){
@@ -22,19 +21,26 @@ export default registerCommand({
         }
         else if(args[1].toLowerCase() == "start")
         {   
-            if(args[2] == undefined)
-                timer = 1800
-            else if(args[2].includes("h"))
-                timer = parseInt(args[2])*60*60 ?? 0
-            else if(args[2].includes("m"))
-                timer = parseInt(args[2])*60 ?? 0
-            else
-                timer = parseInt(args[2]) ?? 0
-            
-            constants.data.testTitlePlay = true
-            constants.data.miningtestgui.istestactive = true
-            constants.data.save()
-            ChatLib.chat(`${constants.PREFIX}&bSet timer to ${Math.floor(timer/60)}m ${Math.ceil(timer%60)}s`)
+            if (!constants.data.miningtestgui.istestactive){
+                resetTest()
+                if(args[2] == undefined)
+                    timer = 1800
+                else if(args[2].includes("h"))
+                    timer = parseInt(args[2])*60*60 ?? 0
+                else if(args[2].includes("m"))
+                    timer = parseInt(args[2])*60 ?? 0
+                else
+                    timer = parseInt(args[2]) ?? 0
+
+                constants.data.testTitlePlay = true
+                constants.data.miningtestgui.istestactive = true
+                constants.data.miningtestgui.timer = timer
+                constants.data.miningtestgui.maxtimer = timer
+                constants.data.save()
+                ChatLib.chat(`${constants.PREFIX}&bSet test timer to ${Math.floor(timer/60)}m ${Math.ceil(timer%60)}s`)
+            } else {
+            ChatLib.chat(`${constants.PREFIX}&bA test is already active to reset do "/cw test reset"`)
+            }
         }
         else if (args[1].toLowerCase() == "reset"){
             resetTest()
@@ -59,9 +65,6 @@ export default registerCommand({
         }
         else
             return ChatLib.chat(`${constants.PREFIX}&bOptions are: &3start&b, &3reset&b, &3set&b, &3resetpbs&b.`)
-        constants.data.miningtestgui.timer = timer
-        constants.data.miningtestgui.maxtimer = timer
-        constants.data.save()
     }
 })
 
