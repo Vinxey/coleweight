@@ -79,8 +79,9 @@ function getCommissionReq(comm){
     if (comm[1].includes('D') || settings.commissionPercents){
        return ` &a${comm[0]}: &b${comm[1]}\n`
     }else{
+        
         num = comm[1].replace('%','')
-        num = ~~(parseInt(num) / 100)
+        num = (parseInt(num) / 100)
     }
 
     if (oneFiveComms.some(item => comm[0].includes(item))){
@@ -103,6 +104,5 @@ function getCommissionReq(comm){
         maxnum = 50
     }
     else return ` &a${comm[0]}: &b${comm[1]}\n`
-
-    return ` &a${comm[0]}: &b${maxnum * num} / ${maxnum}\n`
+    return ` &a${comm[0]}: &b${Math.round(maxnum * num)} / ${maxnum}\n`
 }
