@@ -15,8 +15,6 @@ thousandComms = ['Gemstone Collector','Hard Stone'] //
 thirteenComms = ['Yog','Automaton','Team Treasurite']
 
 const PREFIX = constants.PREFIX
-delayIterator = 100
-meow = true
 const commissionGui = new BaseGui(["commissionGui"], () =>
 
 {
