@@ -32,7 +32,7 @@ const consumablesGui = new BaseGui(["consumablesGui","consumables","consumablest
     if(settings.hideConsumables && !settings.showTruffle){
         message += ''
     }else if (constants.data.truffleExperation > 0){
-        message+= `&aCacao Truffle: &b${Math.floor(constants.data.powderPumpkinExperation/60)}m ${Math.floor(constants.data.powderPumpkinExperation%60)}s\n`
+        message+= `&aCacao Truffle: &b${Math.floor(constants.data.truffleExperation/60)}m ${Math.floor(constants.data.truffleExperation%60)}s\n`
     }else message+= `&aCacao Truffle: &cExpired!`
 
     return message
