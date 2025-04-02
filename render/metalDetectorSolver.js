@@ -2,7 +2,6 @@
 import settings from "../settings"
 import constants from "../util/constants"
 import { drawCoolWaypoint, trace } from "../util/renderUtil"
-import constants from "../util/constants"
 const PREFIX = constants.PREFIX
 
 let chestCoords = JSON.parse(FileLib.read("Coleweight", "data/treasureChestCoords.json"))

@@ -17,13 +17,6 @@ thirteenComms = ['Yog','Automaton','Team Treasurite']
 const PREFIX = constants.PREFIX
 delayIterator = 100
 meow = true
-
-/*
-commLocationCheck = false;
-commLocationCH = true;
-commLocationDM = true;
-commLocationGT = true;
-*/
 const commissionGui = new BaseGui(["commissionGui"], () =>
 
 {
