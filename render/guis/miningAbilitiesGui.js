@@ -4,40 +4,34 @@ import { capitalizeFirst, dwarvenChecker, endChecker, hollowsChecker, isPlayerHo
 import { BaseGui } from "../BaseGui"
 import constants from "../../util/constants"
 
+
 //initializes ability from data  
 activeAbilities = undefined
+blegg = false
+tankCooldown = 1
+activetimer = 0
 addAbility(constants.data.currentAbility, 0)
 
 
 const miningAbilitiesGui = new BaseGui(["abilityGui", "miningabilities"], () => {
-    if(!checkAreas() || constants.data.currentAbility == "") // had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
-           
-        return
-        
-        let leftValues = [],
-        rightValues = []
-    
-        leftValues.push(`&e${activeAbilities.name} CD`)
-        rightValues.push(activeAbilities.timer + "s")
-    
-
-    if(miningAbilitiesGui.isOpen() && leftValues.length < 1)
-    {
-        leftValues.push("Mining Speed Boost")
-        rightValues.push("0")
+    if(!checkAreas() || constants.data.currentAbility == ""){ // had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
+        if(miningAbilitiesGui.isOpen())
+        {
+            return `&aMining Speed Boost: &b0s\n`
+        }
+            return
     }
-    let message = ""
-
-    leftValues.forEach((value, i) => {
-        message += "&a" + value + ": &b" + rightValues[i] + "\n"
-    })
-
+    let message = ``
+    message = `&e${activeAbilities.name}: &b${activeAbilities.timer}s\n`
+    if (activetimer > 0){
+        message += `&aActive! &7(${activetimer}s)`
+    }
     return message
 }, () => { return miningAbilitiesGui.isOpen() || settings.miningAbilitiesGui})
  
 function checkAreas()
 {
-    if(dwarvenChecker.check() || hollowsChecker.check() || endChecker.check()) return true
+    if(dwarvenChecker.check() || hollowsChecker.check() || endChecker.check() ||dwarvenChecker.check()) return true
     return false
 }
 
@@ -45,38 +39,71 @@ registerGui(miningAbilitiesGui)
 
 register("step", () => {
     if (constants.data.currentAbility != ""){// had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
+        if(activetimer > 0){ //check if ability is active
+            activetimer--
+        }
         if(activeAbilities.timer > 0)
             activeAbilities.timer -= 1
-        else if (activeAbilities.title.drawState == 0 && settings.miningAbilities && constants.data.miningAbilities != "z")
+        else if (activeAbilities.title.drawState == 0 && settings.miningAbilities)
             activeAbilities.title.draw()
     }
-    
-}).setDelay(1)
- 
 
-//gets skymall and saves it to data could be used for other things also but mainly just doing for 20% cooldown reduction thing
+}).setDelay(1)
 
 
 //gets ability through you used your {ability name} message
 register("chat", (abilityName) =>{
     //sets timer to 0 otherwise timer becomes undefined cause javascript is awsome and idc enough to fix it properly
+    currentPick = Player.getHeldItem()
+    //do this on a seperate line as if it takes too long the item will switch when drill swapping
+    currentPick = currentPick.getLore()
+    //find the tank and check for Omelette in held item and set cooldown reduction accordingly
+    currentPick.forEach((line) => {
+        if (line.includes('Tank')){
+            tank = line
+        }
+        if (line == '§5§o§7§aBlue Cheese Goblin Omelette Part'){
+            blegg = true
+        }
+    })
+    switch(tank){
+        case '§5§o§7§aPerfectly-Cut Fuel Tank':
+            tankCooldown = .9
+            break;
+        case '§5§o§7§aGemstone Fuel Tank': 
+            tankCooldown = .06
+            break;
+        case '§5§o§7§aTitanium-Infused Fuel Tank':
+            tankCooldown = .96
+            break;
+        case '§5§o§7§aMithril-Infused Fuel Tank':
+            tankCooldown = .98
+            break;
+        default: 
+            tankCooldown = 1
+            break;
+    }
     constants.data.currentAbility = abilityName
     constants.data.save()
     addAbility(abilityName, 0)
+    activetimer = maxActiveTimer
 }).setCriteria(/&r&aYou used your &r&6([a-zA-Z ]+) &r&aPickaxe Ability!&r/g)
+
 
 //gets ability through hotm selection
 register("chat", (abilityName) =>{
     constants.data.currentAbility = abilityName
     constants.data.save()
-    addAbility(abilityName)
+    addAbility(abilityName, activeAbilities.timer)
 }).setCriteria(/&r&aYou selected &r&e([a-zA-Z ]+) &r&aas your Pickaxe Ability. This ability will apply to all of your pickaxes!&r/g)
+
 
 //gets ability name through "{ability} is now available" message
 register("chat", (abilityName) => {
     constants.data.currentAbility = abilityName
     constants.data.save()
 }).setCriteria(/&r&a&r&6([a-zA-Z ]+) &r&ais now available!&r/g)
+
 
 //gets cooldown from chat cause sometimes its more accurate
 register("chat", (cooldown) =>{
@@ -85,56 +112,81 @@ register("chat", (cooldown) =>{
 }
 }).setCriteria(/&r&cYour pickaxe ability is on cooldown for ([0-9]+)s.&r/g)
 
+
+
 function addAbility(abilityName, timer = 0)
 {
     let found = false
     let maxTimer
 
-    //Gives Ability base cooldown
-    //pickobulus is a little innacurate cause for some reason its the only ability where the cooldown is effected by blegg so this just assumes no  blegg
-    if (constants.data.currentAbility == "Pickobulus"){
-        maxTimer = 50
-    }
-    else {
-        maxTimer = 120
+    // finds cooldown and length of each ability
+    switch(constants.data.currentAbility){
+        case "Mining Speed Boost":
+            if (blegg){
+                maxActiveTimer = 20
+            } else{
+                maxActiveTimer = 15
+            }
+                maxTimer = 120
+            break;
+        case "Pickobulus":
+            if (blegg){
+                maxTimer = 40
+            } else{
+                maxTimer = 50
+            }
+            maxActiveTimer = 0
+            break;
+        case "Anomalous Desire":
+            if (blegg){
+                maxTimer = 100
+            } else{
+                maxTimer = 110
+            }
+            maxActiveTimer = 30
+            break;
+        case "Maniac Miner":
+            if (blegg){
+                maxActiveTimer = 35
+            } else{ 
+                maxActiveTimer = 30
+            }
+            maxTimer = 120
+            break;
+        case "Gemstone Infusion" || "Sheer Force":
+            if (blegg){
+                maxActiveTimer = 30
+            } else{
+                maxActiveTimer = 25
+            }
+            maxTimer = 120
+            break;
+        default:
+            maxTimer = 0
+            maxActiveTimer = 0
+            break;
+        
     }
 
-    //checks for active pet for bal
+    //checks active pet for bal
     if (constants.data.currentPet == "bal"){
-        Bal = true
+        Bal = .9
     }else {
-        Bal = false
+        Bal = 1
     }
 
     //checks if skymall has cooldown reduction
     if (constants.data.currentSkymall == "-20% Pickaxe Ability cooldowns"){
-        Skymall = true
+        Skymall = .8
     } else{
-        Skymall = false
+        Skymall = 1
     }
-    //print(timer)
+
     //if the timer has finished set the new timer based on buffs
     if (timer <= 0) {
-        let multiplier = 1
-        
-        //if only perf tank 10% reduction
-        if (settings.PerfectFuelTank) multiplier *= 0.9
 
-        //if only bal tank 10% reduction
-        if (Bal) multiplier *= 0.9
-
-        //if only skymall tank 20% reduction
-        if (Skymall) multiplier *= 0.8
-    
-        //if all buffs ~35% reduction
-        if (settings.PerfectFuelTank && Bal && Skymall) multiplier = 0.648
-
-        //if Skymall + other 28% reduction
-        else if ((settings.PerfectFuelTank && Skymall) || (Bal && Skymall)) multiplier = .72
-
-        //if tank + Bal 19% reduction
-        else if (settings.PerfectFuelTank && Bal) multiplier = 0.81        
-        timer = Math.round(maxTimer * multiplier)
+        //calc timer based on reductions
+        timer = Math.round(maxTimer * (Bal * Skymall * tankCooldown))
     }
     
     
@@ -143,20 +195,18 @@ function addAbility(abilityName, timer = 0)
             found = true
             activeAbilities.name = abilityName
             activeAbilities.title = new Title({text: `&6[&3&kd&6] &b&l${abilityName}&6 [&3&kd&6]`})
-            //timer = activeAbilities.timer
     }
 
     //if this is first check apply default attributes and create object
     if (!found)
     {
-        //print(object)
         let object = {timer, name: abilityName, title: new Title({text: `&6[&3&kd&6] &b&l${abilityName}&6 [&3&kd&6]`})}
         activeAbilities = (object)
         drawTimestamp = timer
         activeAbilities.title.drawState = 0
         activeAbilities.timer = timer
-        //print(activeAbilities.timer)
+        print(timer)
     }
-    
+    blegg = false
     
 }

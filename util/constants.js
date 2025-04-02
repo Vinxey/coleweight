@@ -74,7 +74,7 @@ let PogData = new PogObject("Coleweight", {
     "abilityGui": {
         "x": 0,
         "y": 0,
-        "alignment": 0,
+        "alignment": 1,
         "scale": 1.0
     },
     "miningtestgui": {
