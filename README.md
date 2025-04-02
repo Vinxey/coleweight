@@ -4,7 +4,6 @@ Things here may not fully work if so dm me on discord @vinxey
 
 ## features in this currently that should 100% work
 - mining ability fix
-- fix metal detector solver
 - commission gui
 - xp tracker with /cw test
 - consumable tracker
