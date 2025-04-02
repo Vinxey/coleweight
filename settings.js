@@ -17,6 +17,10 @@ class Settings {
         this.addDependency("Glacite Tunnels", "Commission Location Hider")
         this.addDependency("Dwarven Mines", "Commission Location Hider")
         this.addDependency("Crystal Hollows", "Commission Location Hider")
+        this.addDependency("toggle Fillet o' fish","toggle individual consumables")
+        this.addDependency("toggle Cacao Truffle","toggle individual consumables")
+        this.addDependency("toggle Pristine Potato","toggle individual consumables")
+        this.addDependency("toggle Powder Pumpkin","toggle individual consumables")
     }
     // CAT General
     // SUBCAT Discord
@@ -470,6 +474,66 @@ class Settings {
     })
     moveAbilitiesLocation() {
         ChatLib.command("cw move miningabilities", true);
+    }
+    // SUBCAT Consumables
+    @SwitchProperty({ 
+        name: "Consumables Gui",
+        description: "Toggles consumables gui",
+        subcategory: "Consumables",
+        category: "Gui"
+    })
+    consumablesGui = false;
+    @SwitchProperty({
+        name: "Show title when consumables expire",
+        description: "Shows a title on screen when a consumable expires",
+        subcategory: "Consumables",
+        category: "Gui"
+    })
+    showConsumableTitle = false;
+    @SwitchProperty({
+        name: "toggle individual consumables",
+        description: "Makes it so that you can pick and choose which consumables you want on the gui",
+        subcategory: "Consumables",
+        category: "Gui"
+    })
+    hideConsumables = false;
+    @SwitchProperty({
+        name: "toggle Fillet o' fish",
+        description: "if disabled hides Fillet o' fish from consumable gui",
+        subcategory: "Consumables",
+        category: "Gui"
+    })
+    showFish = true;
+    @SwitchProperty({
+        name: "toggle Cacao Truffle",
+        description: "if disabled hides Truffle from consumable gui",
+        subcategory: "Consumables",
+        category: "Gui"
+    })
+    showTruffle = true;
+    @SwitchProperty({
+        name: "toggle Pristine Potato",
+        description: "if disabled hides Pristine Potato from consumable gui",
+        subcategory: "Consumables",
+        category: "Gui"
+    })
+    showPristinePotato = true;
+    @SwitchProperty({
+        name: "toggle Powder Pumpkin",
+        description: "if disabled hides Powder Pumpkin from consumable gui",
+        subcategory: "Consumables",
+        category: "Gui"
+    })
+    showPowderPumpkin = true;
+    @ButtonProperty({
+        name: "Change consumables position",
+        description: "Move the location of the consumables gui.",
+        subcategory: "Consumables",
+        category: "Gui",
+        placeholder: "Open"
+    })
+    moveConsumablesLocation() {
+        ChatLib.command("cw move consumablesgui", true);
     }
     // SUBCAT Powdertracker
     @SwitchProperty({ 

@@ -18,6 +18,11 @@ let PogData = new PogObject("Coleweight", {
     "currentSkymall":"",
     "effMinerEnabled": false,
     "lobbyswaps": 0,
+    "fishExperation": 0,
+    "powderPumpkinExperation": 0,
+    "pristinePotatoExperation": 0,
+    "truffleExperation": 0,
+    "logoutTime": 0,
     "coleweightGui": {
         "x": 0.5,
         "y": 141,
@@ -89,6 +94,12 @@ let PogData = new PogObject("Coleweight", {
         "scale": 1.0
     },
     "skymallGui": {
+        "x": 0,
+        "y": 0,
+        "alignment": 0,
+        "scale": 1.0
+    },
+    "consumablesGui":{
         "x": 0,
         "y": 0,
         "alignment": 0,
