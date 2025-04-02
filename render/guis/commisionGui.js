@@ -4,7 +4,7 @@ import {dwarvenChecker, hollowsChecker, mineshaftCheck,gtChecker} from "../../ut
 import constants from "../../util/constants"
 import settings from "../../settings"
 //comms that require a mineshaft
-shaftComms = ['Corpse Looter', 'Mineshaft','Scrap Collector','Maniac']
+shaftComms = ['Corpse', 'Mineshaft','Scrap','Maniac']
 //comms thats max number is 1500
 oneFiveComms = ['Glacite Collector','Umber','Tungsten','Citrine','Peridot','Aquamarine','Onyx'] //
 //comms thats max number is 10
