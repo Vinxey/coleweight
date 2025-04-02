@@ -22,9 +22,11 @@ const commissionGui = new BaseGui(["commissionGui"], () =>
 {
     if (!checkAreas() || !settings.commissionGui) {return}
     if (settings.commLocationCheck){
+        if (!mineshaftCheck.check()){
         if(!settings.commLocationCH && hollowsChecker.check()){return}
-        if(!settings.commLocationGT && (gtChecker.check() || mineshaftCheck.check())){return}
+        if(!settings.commLocationGT && (gtChecker.check())){return}
         if(!settings.commLocationDM && (!gtChecker.check() && dwarvenChecker.check())){return}
+        }
     }
     message = getcommissions()
 
@@ -73,12 +75,17 @@ function getcommissions() {
 
 function getCommissionReq(comm){
     comm = comm.split(':')
+
+    if (comm[1].includes('D')){
+        return ` &a${comm[0]}: &b${comm[1]}\n`
+    }   
     if (settings.hideShaftComms && !mineshaftCheck.check() && shaftComms.some(item => comm[0].includes(item))){
         return ''
     }
-    if (comm[1].includes('D') || settings.commissionPercents){
-       return ` &a${comm[0]}: &b${comm[1]}\n`
-    }else{
+    if (settings.commissionPercents){
+        return ` &a${comm[0]}: &b${comm[1]}\n`
+    } 
+    else{
         
         num = comm[1].replace('%','')
         num = (parseInt(num) / 100)
