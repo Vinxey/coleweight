@@ -49,7 +49,6 @@ register("actionBar", (dist) => {
             let z = ~~(Player.getZ());
         if (World.getBlockAt(x+1,y-14,z+1).getType().getID() == 169 && World.getBlockAt(x-1,y-14,z-1).getType().getID() == 169){
             baseCoordinates = [x+5,y-13,z+5]
-            print(baseCoordinates)
         }
         return;
 }
@@ -63,9 +62,8 @@ register("actionBar", (dist) => {
 
     chestCoords.forEach((coordinates) => {
         let currentDistance = Math.hypot(Player.getX() - (baseCoordinates[0] - coordinates[0]), Player.getY() - (baseCoordinates[1] - coordinates[1] + 1), Player.getZ() - (baseCoordinates[2] - coordinates[2]))
-        //print(`${Math.hypot(Player.getX())}-(${Math.hypot(baseCoordinates[0])}-${Math.hypot(coordinates[0])}),-${Math.hypot(Player.getY())}-${Math.hypot(baseCoordinates[1])}-${Math.hypot(coordinates[1] + 1)})-${Math.hypot(Player.getZ())}-${Math.hypot(baseCoordinates[2])}-${Math.hypot(coordinates[2])})`)
         if (Math.round(currentDistance * 10) / 10 === distance) {
-
+            
             if ([baseCoordinates[0] - coordinates[0], baseCoordinates[1] - coordinates[1], baseCoordinates[2] - coordinates[2]].join(",") === ignoreLocation) {
                 ignoreLocation = undefined
                 return

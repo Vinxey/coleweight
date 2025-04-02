@@ -40,7 +40,7 @@ const commissionGui = new BaseGui(["commissionGui"], () =>
 
 function checkAreas()
 {
-    if(dwarvenChecker.check() || hollowsChecker.check() || mineshaftCheck.check()) return true
+    if(dwarvenChecker.check() || hollowsChecker.check() || mineshaftCheck.check()||gtChecker.check()) return true
     return false
 }
 

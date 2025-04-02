@@ -205,7 +205,6 @@ function addAbility(abilityName, timer = 0)
         drawTimestamp = timer
         activeAbilities.title.drawState = 0
         activeAbilities.timer = timer
-        print(timer)
     }
     blegg = false
     
