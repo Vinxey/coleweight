@@ -6,7 +6,7 @@ Things here may not fully work if so dm me on discord @vinxey
 - mining ability fix
 - fix metal detector solver
 - commission gui
-
+- xp tracker with /cw test
 ## ToDo list in order of priority 
 - collection tracker (/cw test) [ ] 60% done
 - consumable tracker [ ] 10% done
