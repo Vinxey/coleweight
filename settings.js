@@ -456,15 +456,6 @@ class Settings {
         category: "Gui"
     })
     miningAbilitiesGui = false;
-
-    @SwitchProperty({
-        name: "Mining abilities selected indicator",
-        description: "Tells which ability is selected on the ability gui.",
-        subcategory: "Mining Abilities",
-        category: "Gui"
-    })
-    miningAbilitiesSelectedIndicator = true;
-
     @ButtonProperty({
         name: "Change mining abilities position",
         description: "Move the location of the mining abilities gui.",
