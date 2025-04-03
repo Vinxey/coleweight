@@ -21,7 +21,7 @@ function addDependenciesfromarray(array,dependant,obj){
 
 @Vigilant("Coleweight/config", "Coleweight Settings", {
     getCategoryComparator: () => (a, b) => {
-        const categories = ["General", "Gui", "Stats", "Waypoints", "Other"];
+        const categories = ["General","Glacite Tunnels", "Gui", "Stats", "Waypoints", "Other"];
 
         return categories.indexOf(a.name) - categories.indexOf(b.name);
     }
@@ -161,37 +161,7 @@ class Settings {
     })
     debug = false;
 
-    @SwitchProperty({
-        name: "Glacite tunnels waypoints",
-        description: "Shows colored waypoints where gem types are in the Glacite Tunnels.",
-        subcategory: "General",
-        category: "General"
-    })
-    tunnelsWaypoints = true;
-
-    @SwitchProperty({
-        name: "Party transfer command",
-        description: "Enables party command !ptme or ?pt or .ptme etc. to transfer party",
-        subcategory: "General",
-        category: "General"
-    })
-    transferCommand = false;
-
-    @SwitchProperty({
-        name: "Efficient miner overlay V2",
-        description: "Shows an heatmap for umber/tungsten highlighting the best block to break.",
-        subcategory: "General",
-        category: "General"
-    })
-    efficientMinerOverlay = false;
-
-    @SwitchProperty({
-        name: "Old heatmap",
-        description: "Uses the old heatmap system for the efficient miner overlay.",
-        subcategory: "General",
-        category: "General"
-    })
-    oldHeatmap = false;
+    
 
     @SwitchProperty({
         name: "Precision miner overlay",
@@ -248,6 +218,38 @@ class Settings {
         category: "General"
     })
     streamerDisableWaypointsOnDeath = true;
+    // Cat Glacite Tunnels
+    @SwitchProperty({
+        name: "Glacite tunnels waypoints",
+        description: "Shows colored waypoints where gem types are in the Glacite Tunnels.",
+        subcategory: "Glacite Tunnels",
+        category: "Glacite Tunnels"
+    })
+    tunnelsWaypoints = true;
+
+    @SwitchProperty({
+        name: "Party transfer command",
+        description: "Enables party command !ptme or ?pt or .ptme etc. to transfer party",
+        subcategory: "Glacite Tunnels",
+        category: "Glacite Tunnels"
+    })
+    transferCommand = false;
+
+    @SwitchProperty({
+        name: "Efficient miner overlay V2",
+        description: "Shows an heatmap for umber/tungsten highlighting the best block to break.",
+        subcategory: "Glacite Tunnels",
+        category: "Glacite Tunnels"
+    })
+    efficientMinerOverlay = false;
+
+    @SwitchProperty({
+        name: "Old heatmap",
+        description: "Uses the old heatmap system for the efficient miner overlay.",
+        subcategory: "Glacite Tunnels",
+        category: "Glacite Tunnels"
+    })
+    oldHeatmap = false;
     // CAT Gui
     // SUBCAT Alloy Tracker
     @SwitchProperty({
@@ -451,6 +453,14 @@ class Settings {
         category: "Gui"
     })
     miningAbilitiesGui = false;
+    @SwitchProperty({ 
+        name: "Mining abilities",
+        description: "Toggles title notification of mining abilities.",
+        subcategory: "Mining Abilities",
+        category: "Gui"
+    })
+    miningAbilities = false;
+
     @ButtonProperty({
         name: "Change mining abilities position",
         description: "Move the location of the mining abilities gui.",
