@@ -18,6 +18,7 @@ registerCommand({
     aliases: ["automatons", "automaton"],
     description: "Automaton waypoints for precursor city.",
     options: "[toggle]",
+    showInHelp: false,
     category: "waypoints",
     execute: (args) => {
         const WAYPOINTNAME = "Automatons"

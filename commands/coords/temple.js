@@ -20,6 +20,7 @@ registerCommand({
     aliases: ["temple"],
     description: "Waypoints for jungle temple armadillo clip.",
     options: "[toggle]",
+    showInHelp: false,
     category: "waypoints",
     execute: (args) => {
         const WAYPOINTNAME = "Temple"

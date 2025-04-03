@@ -20,6 +20,7 @@ registerCommand({
     aliases: ["throne"],
     description: "Throne waypoints.",
     options: "[toggle]",
+    showInHelp: false,
     category: "waypoints",
     execute: (args) => {
         if(args[1] != "toggle")

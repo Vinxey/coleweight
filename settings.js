@@ -1,5 +1,24 @@
 import { @Vigilant, @ButtonProperty, @SwitchProperty, @SelectorProperty, @SliderProperty, @TextProperty, @ColorProperty, Color } from "../Vigilance/index"
 
+const SubCatCommissions = ["Change commission gui position","toggle shaft commission visibility","Percents","Commission Location Hider","Crystal Hollows","Dwarven Mines","Glacite Tunnels"]
+const SubCatCoinTracker = ["Force NPC","Change Coin Tracker Position","Gemstone Type"]
+const SubCatMetalDetector = ["Alert Tools","Mute Metal Detector Sound"]
+const SubCatMiningTest = ["Test Start Countdown","Collection Tracker","Change MiningTest gui position"]
+const SubCatAbilities = ["Mining abilities","Change mining abilities position"]
+const SubCatConsumables = ["Show title when consumables expire","toggle individual consumables","toggle Fillet o' fish","toggle Cacao Truffle","toggle Pristine Potato","toggle Powder Pumpkin","Change consumables position"]
+const SubCatPowderTracker = ["Show totals","Show rates","Change Powdertracker position"]
+const SubCatTimer = ["Change timer position","Timer End Visiblity"]
+const SubCatStreamerMode = ["Block tab","Block debug","Block bossbar","Randomize lobby","Disable waypoints on death"]
+
+const SubSubCatCommissionhiders = ["Crystal Hollows","Dwarven Mines","Glacite Tunnels"]
+const SubSubCatConsumablehiders = ["toggle Fillet o' fish","toggle Cacao Truffle","toggle Pristine Potato","toggle Powder Pumpkin"]
+
+function addDependenciesfromarray(array,dependant,obj){
+    array.forEach((itum) =>{
+        obj.addDependency(itum, dependant)
+    })
+}   
+
 @Vigilant("Coleweight/config", "Coleweight Settings", {
     getCategoryComparator: () => (a, b) => {
         const categories = ["General", "Gui", "Stats", "Waypoints", "Other"];
@@ -9,18 +28,26 @@ import { @Vigilant, @ButtonProperty, @SwitchProperty, @SelectorProperty, @Slider
 })
 
 
+
 class Settings {
     constructor() {
         this.initialize(this);
         this.setCategoryDescription("General", `&aColeweight &bv${JSON.parse(FileLib.read("Coleweight", "metadata.json")).version}` + 
         `\n&aBy &bNinjune`)
-        this.addDependency("Glacite Tunnels", "Commission Location Hider")
-        this.addDependency("Dwarven Mines", "Commission Location Hider")
-        this.addDependency("Crystal Hollows", "Commission Location Hider")
-        this.addDependency("toggle Fillet o' fish","toggle individual consumables")
-        this.addDependency("toggle Cacao Truffle","toggle individual consumables")
-        this.addDependency("toggle Pristine Potato","toggle individual consumables")
-        this.addDependency("toggle Powder Pumpkin","toggle individual consumables")
+        addDependenciesfromarray(SubCatCommissions,"Commission gui",this)
+        addDependenciesfromarray(SubCatCoinTracker,"Coin Tracker",this)
+        addDependenciesfromarray(SubCatMetalDetector,"Metal Detector Solver",this)
+        addDependenciesfromarray(SubCatMiningTest,"Mining Test gui",this)
+        addDependenciesfromarray(SubCatAbilities,"Mining abilities gui",this)
+        addDependenciesfromarray(SubCatConsumables,"Consumables Gui",this)
+        addDependenciesfromarray(SubCatPowderTracker,"Show powdertracker",this)
+        addDependenciesfromarray(SubCatTimer,"Timer",this)
+        addDependenciesfromarray(SubCatStreamerMode,"Streamer mode",this)
+
+        addDependenciesfromarray(SubSubCatCommissionhiders,"Commission Location Hider",this)
+        addDependenciesfromarray(SubSubCatConsumablehiders,"toggle individual consumables",this)
+        
+
     }
     // CAT General
     // SUBCAT Discord
@@ -125,14 +152,6 @@ class Settings {
         category: "General"
     })
     invisibleItems = false;
-
-    @SwitchProperty({
-        name: "Auto renew Crystal Hollows Pass",
-        description: "Renews pass when the 1 minute message pops up.",
-        subcategory: "General",
-        category: "General"
-    })
-    autoRenew = true;
 
     @SwitchProperty({
         name: "Debug",
@@ -286,21 +305,16 @@ class Settings {
     })
     gemstoneType = 2;
     // SUBCAT Coleweight Tracker
+    /*
+    no work for now
     @SwitchProperty({
         name: "Coleweight tracker",
         description: "&4Deprecated &7Update Soon!",
         subcategory: "Coleweight Tracker",
         category: "Gui"
     })
-    cwToggle = false;
+    cwToggle = false;*/
     // SUBCAT Collection
-    @SwitchProperty({
-        name: "Collection tracker",
-        description: "&4Deprecated &7 Update soon!",
-        subcategory: "Collection",
-        category: "Gui"
-    })
-    collectionTracker = false;
     // SUBCAT Metal Detector Solver
     @SwitchProperty({
         name: "Metal Detector Solver",
@@ -441,14 +455,6 @@ class Settings {
     }
 
     // SUBCAT Mining Abilities
-    @SwitchProperty({ 
-        name: "Mining abilities",
-        description: "Toggles title notification of mining abilities.",
-        subcategory: "Mining Abilities",
-        category: "Gui"
-    })
-    miningAbilities = false;
-
     @SwitchProperty({
         name: "Mining abilities gui",
         description: "Toggles mining abilities gui.",
@@ -456,15 +462,13 @@ class Settings {
         category: "Gui"
     })
     miningAbilitiesGui = false;
-
-    @SwitchProperty({
-        name: "Mining abilities selected indicator",
-        description: "Tells which ability is selected on the ability gui.",
+    @SwitchProperty({ 
+        name: "Mining abilities",
+        description: "Toggles title notification of mining abilities.",
         subcategory: "Mining Abilities",
         category: "Gui"
     })
-    miningAbilitiesSelectedIndicator = true;
-
+    miningAbilities = false;
     @ButtonProperty({
         name: "Change mining abilities position",
         description: "Move the location of the mining abilities gui.",
@@ -834,26 +838,6 @@ class Settings {
         category: "Other"
     })
     treecapTimer = false;
-
-    // SUBCAT Kuudra
-    @SwitchProperty({
-        name: "Cells Alignment Tracker",
-        description: "Shows a tracker for the current cells alignment from the gyrokinetic wand.",
-        subcategory: "Kuudra",
-        category: "Other"
-    })
-    gyroTracker = false;
-
-    @ButtonProperty({
-        name: "Change Alignment Tracker Position",
-        description: "Move the location of the alignment tracker.",
-        subcategory: "Kuudra",
-        category: "Other",
-        placeholder: "Open"
-    })
-    moveGyroLocation() {
-        ChatLib.command("cw move gyro", true);
-    }
     // SUBCAT UYOR
     @SwitchProperty({
         name: "Corpse Finder",
@@ -862,14 +846,6 @@ class Settings {
         category: "Other"
     })
     corpseEsp = false;
-
-    @SwitchProperty({
-        name: "Pest Finder",
-        description: "&4Depreciated",
-        subcategory: "UYOR",
-        category: "Other"
-    })
-    pestEsp = false;
 }
 
 export default new Settings()

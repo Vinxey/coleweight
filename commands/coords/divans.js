@@ -20,6 +20,7 @@ registerCommand({
     aliases: ["divans", "divan"],
     description: "Divan treasure waypoints for Mines of Divan.",
     options: "[toggle]",
+    showInHelp: false,
     category: "waypoints",
     execute: (args) => {
         const WAYPOINTNAME = "Divan"

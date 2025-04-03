@@ -21,6 +21,7 @@ registerCommand({
     aliases: ["yog"],
     description: "Yog waypoints for bal.",
     options: "[toggle]",
+    showInHelp: false,
     category: "waypoints",
     execute: (args) => {
         const WAYPOINTNAME = "Yog"

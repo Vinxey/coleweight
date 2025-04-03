@@ -14,7 +14,6 @@ export default guis
 import "./render/guis/alloyGui"
 import "./render/guis/coinGui"
 import "./render/guis/ffGui"
-import "./render/guis/gyroGui"
 import "./render/guis/powertrackerGui"
 import "./render/guis/scrapGui"
 import "./render/guis/miningAbilitiesGui"

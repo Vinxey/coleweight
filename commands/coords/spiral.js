@@ -19,6 +19,7 @@ registerCommand({
     aliases: ["spiral"],
     description: "Waypoints for spiral.",
     options: "[toggle]",
+    showInHelp: false,
     category: "waypoints",
     execute: (args) => {
         if(args[1] != "toggle")
