@@ -304,17 +304,6 @@ class Settings {
         options: ["Perfect", "Flawless", "Fine", "Flawed", "Rough"]
     })
     gemstoneType = 2;
-    // SUBCAT Coleweight Tracker
-    /*
-    no work for now
-    @SwitchProperty({
-        name: "Coleweight tracker",
-        description: "&4Deprecated &7Update Soon!",
-        subcategory: "Coleweight Tracker",
-        category: "Gui"
-    })
-    cwToggle = false;*/
-    // SUBCAT Collection
     // SUBCAT Metal Detector Solver
     @SwitchProperty({
         name: "Metal Detector Solver",
