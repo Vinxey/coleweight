@@ -46,7 +46,8 @@ class Settings {
 
         addDependenciesfromarray(SubSubCatCommissionhiders,"Commission Location Hider",this)
         addDependenciesfromarray(SubSubCatConsumablehiders,"toggle individual consumables",this)
-        
+        this.addDependency("Old heatmap","Efficient miner overlay V2")
+
 
     }
     // CAT General
