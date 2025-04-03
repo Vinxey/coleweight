@@ -1,6 +1,6 @@
 import { registerGui } from "../../guiManager"
 import settings from "../../settings"
-import { capitalizeFirst, dwarvenChecker, endChecker, hollowsChecker, isPlayerHoldingDrill, Title } from "../../util/helperFunctions"
+import { gtChecker, dwarvenChecker, endChecker, hollowsChecker, Title } from "../../util/helperFunctions"
 import { BaseGui } from "../BaseGui"
 import constants from "../../util/constants"
 
@@ -31,7 +31,7 @@ const miningAbilitiesGui = new BaseGui(["abilityGui", "miningabilities"], () => 
  
 function checkAreas()
 {
-    if(dwarvenChecker.check() || hollowsChecker.check() || endChecker.check() ||dwarvenChecker.check()) return true
+    if(gtChecker.check() || dwarvenChecker.check() || hollowsChecker.check() || endChecker.check() ||dwarvenChecker.check()) return true
     return false
 }
 
