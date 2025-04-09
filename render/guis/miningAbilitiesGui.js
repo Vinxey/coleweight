@@ -17,7 +17,7 @@ const miningAbilitiesGui = new BaseGui(["abilityGui", "miningabilities"], () => 
     if(!checkAreas() || constants.data.currentAbility == ""){ // had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
         if(miningAbilitiesGui.isOpen())
         {
-            return `&aMining Speed Boost: &b0s\n`
+            return `&eMining Speed Boost: &b95s\n&aActive! &7(20s)`
         }
             return
     }
@@ -176,7 +176,7 @@ function addAbility(abilityName, timer = 0)
     }
 
     //checks if skymall has cooldown reduction
-    if (constants.data.currentSkymall == "-20% Pickaxe Ability cooldowns"){
+    if (constants.data.currentSkymall == "-20% Pickaxe Ability cooldowns" && !endChecker.check()){
         Skymall = .8
     } else{
         Skymall = 1

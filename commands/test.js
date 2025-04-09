@@ -1,7 +1,7 @@
 import { registerCommand } from "../commandManager"
 import { trackCollection, resetTest } from "../render/guis/miningtestGui"
 import constants from "../util/constants"
-
+import settings from "../settings"
 
 export default registerCommand({
     aliases: ["test"],
@@ -21,7 +21,10 @@ export default registerCommand({
         }
         else if(args[1].toLowerCase() == "start")
         {   
-            if (!constants.data.miningtestgui.istestactive){
+            if(settings.collectionTracker){
+                ChatLib.chat(`${constants.PREFIX}&bA Your mining test gui is currently set to collection tracker in settings`)
+            }
+            else if (!constants.data.miningtestgui.istestactive){
                 resetTest()
                 if(args[2] == undefined)
                     timer = 1800

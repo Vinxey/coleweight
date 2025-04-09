@@ -9,34 +9,38 @@ import { addNotation, addCommas } from "../../util/helperFunctions"
 let sessionRunning = false,
  sessionChests = 0,
  sessionGemstone = 0,
- sessionMithril = 0,
  seconds = 0,
  timeSinceLastGain = 0
 
 const powderGui = new BaseGui(["powdertrackerGui", "powdertracker", "powder"], () => {
-    if(!sessionRunning)
+    if(!sessionRunning){
+        if (powderGui.isOpen()){
+            if (!settings.showTotals){
+            return `&aSession Chests: &b500\n&aSessionGemstone: &b28.9 K\n&aChests/hr: &b500\n&aGemstone/hr: &b28.9 K\n&aUptime: &b1hr 0m`
+            } else {
+                return `&aTotal Chests: &b500\n&aTotal Gemstone: &b28.9 K\n&aSession Chests: &b500\n&aSessionGemstone: &b28.9 K\n&aChests/hr: &b500\n&aGemstone/hr: &b28.9 K\n&aUptime: &b1hr 0m`
+            }
+        }
         return
+    }
     let uptimeHr = Math.floor(seconds/60/60),
      lines = [],
      message = ""
 
     if (settings.showTotals)
     {
-        addText("Total Chest", addCommas(constants.data.powdertrackerGui.chests), lines)
+        addText("Total Chests", addCommas(constants.data.powdertrackerGui.chests), lines)
         addText("Total Gemstone", addNotation("oneLetters", constants.data.powdertrackerGui.gemstonePowder), lines)
-        addText("Total Mithril", addNotation("oneLetters", constants.data.powdertrackerGui.mithrilPowder), lines)
     }
 
     addText("Session Chests", addCommas(sessionChests), lines)
     addText("Session Gemstone", addNotation("oneLetters", sessionGemstone), lines)
-    addText("Session Mithril", addNotation("oneLetters", sessionMithril), lines)
 
 
     if (settings.showRates)
     {
         addText("Chests/hr", addCommas(Math.round(((sessionChests ?? 0)/(seconds ?? 1)) * 3600)), lines)
         addText("Gemstone/hr", addNotation("oneLetters", Math.round(((sessionGemstone ?? 0)/(seconds ?? 1)) * 3600)), lines)
-        addText("Mithril/hr", addNotation("oneLetters", Math.round(((sessionMithril ?? 0)/(seconds ?? 1)) * 3600)), lines)
         if(uptimeHr >= 1)
             addText("Uptime", `${uptimeHr}h ${Math.floor(seconds/60) - uptimeHr*60}m`, lines)
         else
@@ -63,29 +67,21 @@ function DoublePowderActive()
 
 register("chat", (value, type) => {
     let powder = parseInt(value.replace(",", ""))
-
+    print('a')
     if (DoublePowderActive())
         powder *= 2
-    if(type.toLowerCase() == "gemstone")
-    {
-        constants.data.powdertrackerGui.gemstonePowder += powder
-        sessionGemstone += powder
-    }
-    else if (type.toLowerCase() == "mithril")
-    {
-        constants.data.powdertrackerGui.mithrilPowder += powder
-        sessionMithril += powder
-    }
+    constants.data.powdertrackerGui.gemstonePowder += powder
+    sessionGemstone += powder
     constants.data.save()
     timeSinceLastGain = 0
     sessionRunning = true
-}).setCriteria(/You received \+([0-9,]+) ([a-zA-Z]+) Powder./g)
+}).setCriteria(/&r    &r&dGemstone Powder &r&8x([0-9^,]+)&r/g)
 
 register("chat", event => {
     constants.data.powdertrackerGui.chests += 1
     sessionChests += 1
     sessionRunning = true
-}).setCriteria("&r&6You have successfully picked the lock on this chest!&r")
+}).setCriteria("&r  &r&6&lCHEST LOCKPICKED &r")
 
 
 register("step", () => {
@@ -112,7 +108,6 @@ function resetVars()
     sessionRunning = false,
     sessionChests = 0,
     sessionGemstone = 0,
-    sessionMithril = 0,
     seconds = 0,
     timeSinceLastGain = 0
 }

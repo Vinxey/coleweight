@@ -11,7 +11,12 @@ function checkAreas()
 }
 const skymallGui = new BaseGui(["skymallGui"], () =>
 {
-    if (!checkAreas()){return}
+    if (!checkAreas()){
+        if (skymallGui.isOpen()){
+            return '&bCurrent Skymall:\n&a10x chance to find Golden and Diamond Goblins'
+        }
+        return
+    }
     return `&bCurrent Skymall:\n&a${constants.data.currentSkymall}`
 }, () => {return skymallGui.isOpen() || settings.skymallGui})
 

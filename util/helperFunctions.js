@@ -245,6 +245,7 @@ class LocationChecker
             {
                 for(let locationsIndex = 0; locationsIndex < this.locations.length; locationsIndex++)
                 {
+                    
                     if(this.scoreboard[lineIndex].toString().includes(this.locations[locationsIndex]))
                     {   
                         this.state = true
@@ -262,7 +263,7 @@ class LocationChecker
 }
 
 export const hollowsChecker = new LocationChecker(["Goblin", "Jungle", "Mithril", "Precursor", "Magma", "Crystal", "Khazad", "Divan", "City"])
-export const dwarvenChecker = new LocationChecker(["Dwarven", "Royal", "Palace", "Library", "Mist", "Cliffside", "Quarry", "Gateway", "Wall", "Forge", "Far", "Burrows", "Springs", "Upper", "Glacite"])
+export const dwarvenChecker = new LocationChecker(["§bThe Lift","Dwarven", "Royal", "Palace", "Library", "Mist", "Cliffside", "Quarry", "Gateway", "Wall", "Forge", "Far", "Burrows", "Springs", "Upper", "Glacite"])
 export const foragingChecker = new LocationChecker(["§aDark Thic", "§aBirch Par", "§aSpruce Wo", "§aSavanna W", "§aJungle Is", "§bForest"])
 export const endChecker = new LocationChecker(["End", "Dragon's"])
 export const mirroverseCheck = new LocationChecker(["§fMirrorver"])

@@ -18,6 +18,9 @@ const PREFIX = constants.PREFIX
 const commissionGui = new BaseGui(["commissionGui"], () =>
 
 {
+    if (commissionGui.isOpen()){
+        return `&2Commissions:\n &aScrap Collector: &b0%\n &aMineshaft Explorer: &bDone!\n &aManiac Slayer: &b4/10\n &aUmber Collector &b1185/1500`
+    }
     if (!checkAreas() || !settings.commissionGui) {return}
     if (settings.commLocationCheck){
         if (!mineshaftCheck.check()){
@@ -75,7 +78,7 @@ function getCommissionReq(comm){
     comm = comm.split(':')
 
     if (comm[1].includes('D')){
-        return ` &a${comm[0]}: &b${comm[1]}\n`
+        return ` &a${comm[0]}: &bDone!\n`
     }   
     if (settings.hideShaftComms && !mineshaftCheck.check() && shaftComms.some(item => comm[0].includes(item))){
         return ''

@@ -17,6 +17,9 @@ const gemstoneCosts = {};
 
 const coinGui = new BaseGui(["coinGui", "coin", "money", "cointracker"], () => {
     if(startTime <= 0)
+        if (coinGui.isOpen()){
+            return `&a(Ruby Fine @ &b12,345&a)\n&a$/hr: &b$123,456,789\n&a$ made: &b$123,456,789&b\n&aUptime: &b1hr 00m`;
+        }
         return;
 
     let type;
