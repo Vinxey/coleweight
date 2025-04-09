@@ -20,16 +20,12 @@ let skymallIndexes = [10,19,28,37]
 
 
 register("chat", (Skymall) => {
-    print(Skymall)
-    print('a')
     if (!possible_perks.includes(Skymall)) return
-    print(Skymall)
     constants.data.currentSkymall = Skymall
     constants.data.save()
 }).setCriteria(/New buff: (.*?)\.$/g)
 
 register("chat", () => {
-    print('a')
     constants.data.currentSkymall = possible_perks[4]
     constants.data.save()
 }).setCriteria(/&r&eNew buff&r&r&r: &r&fGain &r&a5x &r&9Titanium &r&fdrops&r/g)

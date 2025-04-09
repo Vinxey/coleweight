@@ -67,7 +67,6 @@ function DoublePowderActive()
 
 register("chat", (value, type) => {
     let powder = parseInt(value.replace(",", ""))
-    print('a')
     if (DoublePowderActive())
         powder *= 2
     constants.data.powdertrackerGui.gemstonePowder += powder
