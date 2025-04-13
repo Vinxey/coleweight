@@ -186,6 +186,8 @@ export default constants = {
     isFiesta: false
 }
 
+let skymallPerkIndices = [10,19,28,37]
+
 register("gameLoad", () => {
     axios.get("https://ninjune.dev/api/cwinfo?new=true")
     .then((res) => {
@@ -196,10 +198,10 @@ register("gameLoad", () => {
 })
 
 
-register("chat", (lvl, pet, event) => {
+register("chat", (lvl, pet, skin, event) => {
     constants.data.currentPet = pet.toLowerCase()
     constants.data.save()
-}).setCriteria(/&cAutopet &eequipped your &.\[Lvl ([0-9]+)] &.([a-zA-Z]+)&e! &a&lVIEW RULE&r/g)
+}).setCriteria(/&cAutopet &eequipped your &.\[Lvl ([0-9]+)] &.([a-zA-Z ]+)([a-z0-9 ✦&]+e!) &a&lVIEW RULE&r/g)
 
 
 register("chat", (message, pet, event) => {
@@ -217,6 +219,49 @@ register("chat", (state, event) => {
     constants.data.save()
 }).setCriteria(/&r&.([a-zA-Z]+) Efficient Miner&r/g)
 
+
+register("step", () => {
+    let inventoryName = Player?.getContainer()?.getName()?.toString()
+    if(inventoryName == undefined || (!inventoryName.includes("Heart of the Mountain") && !inventoryName.includes("SkyBlock Menu"))) return
+
+    for (i = 0; i < skymallPerkIndices.length; i++)
+    {
+        let item = Player.getContainer().getStackInSlot(skymallPerkIndices[i])
+        if (item == null) continue
+
+        let itemName = item.getName().removeFormatting()
+        let lore = item?.getLore()
+        if(lore == undefined) return
+        
+        if(itemName.includes("Sky Mall")){
+            let skymallPerk = lore[15]?.removeFormatting()
+            skymallPerk = skymallPerk.substring(3, skymallPerk.length - 1)
+            let skymallEnabled = lore[17]?.removeFormatting()
+
+            if (!skymallEnabled.includes("ENABLED")) { 
+                constants.data.currentSkymall = ""
+                constants.data.save()
+                return 
+            }
+
+            let possible_perks = [
+                "-20% Pickaxe Ability cooldowns",
+                "Gain +100⸕ Mining Speed",
+                "Gain +50☘ Mining Fortune",
+                "Gain +15% more Powder while mining",
+                "Gain 5x Titanium drops",
+                "10x chance to find Golden and Diamond Goblins",
+            ]
+
+            if (!possible_perks.includes(skymallPerk)) {
+                return
+            }
+            constants.data.currentSkymall = skymallPerk
+            constants.data.save()
+            return
+        }
+    }
+}).setFps(2) // @CrazyTech4
 
 register("worldLoad", () => {
     Client.scheduleTask(20, updateRegisters);

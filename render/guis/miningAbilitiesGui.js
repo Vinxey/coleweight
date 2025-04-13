@@ -9,6 +9,7 @@ import constants from "../../util/constants"
 activeAbilities = undefined
 blegg = false
 tankCooldown = 1
+tank = ""
 activetimer = 0
 addAbility(constants.data.currentAbility, 0)
 
@@ -22,7 +23,8 @@ const miningAbilitiesGui = new BaseGui(["abilityGui", "miningabilities"], () => 
             return
     }
     let message = ``
-    message = `&e${activeAbilities.name}: &b${activeAbilities.timer}s\n`
+    let displaytimer = parseFloat(activeAbilities.timer).toFixed(2);
+    message = `&e${activeAbilities.name}: &b${displaytimer}s\n`
     if (activetimer > 0){
         message += `&aActive! &7(${activetimer}s)`
     }
@@ -37,18 +39,22 @@ function checkAreas()
 
 registerGui(miningAbilitiesGui)
 
-register("step", () => {
+register("tick", () => {
     if (constants.data.currentAbility != ""){// had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
         if(activetimer > 0){ //check if ability is active
-            activetimer--
+            activetimer -= .05
+            activetimer = Math.round(activetimer*100)/100
         }
-        if(activeAbilities.timer > 0)
-            activeAbilities.timer -= 1
+
+        if(activeAbilities.timer > 0) {
+            activeAbilities.timer -= .05
+            activeAbilities.timer = Math.round(activeAbilities.timer*100)/100
+        }
+            
         else if (activeAbilities.title.drawState == 0 && settings.miningAbilities)
             activeAbilities.title.draw()
     }
-
-}).setDelay(1)
+})
 
 
 //gets ability through you used your {ability name} message
@@ -105,15 +111,6 @@ register("chat", (abilityName) => {
 }).setCriteria(/&r&a&r&6([a-zA-Z ]+) &r&ais now available!&r/g)
 
 
-//gets cooldown from chat cause sometimes its more accurate
-register("chat", (cooldown) =>{
-    if (constants.data.currentAbility != ""){
-    addAbility(constants.data.currentAbility, cooldown)
-}
-}).setCriteria(/&r&cYour pickaxe ability is on cooldown for ([0-9]+)s.&r/g)
-
-
-
 function addAbility(abilityName, timer = 0)
 {
     let found = false
@@ -164,8 +161,7 @@ function addAbility(abilityName, timer = 0)
         default:
             maxTimer = 0
             maxActiveTimer = 0
-            break;
-        
+            break;   
     }
 
     //checks active pet for bal
@@ -186,7 +182,7 @@ function addAbility(abilityName, timer = 0)
     if (timer <= 0) {
 
         //calc timer based on reductions
-        timer = Math.round(maxTimer * (Bal * Skymall * tankCooldown))
+        timer = Math.trunc(maxTimer * (Bal * Skymall * tankCooldown))
     }
     
     
