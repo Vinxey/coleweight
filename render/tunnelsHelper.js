@@ -31,9 +31,3 @@ registerWhen(register("renderWorld", () => {
         drawCoolWaypoint(wp.coords[0], wp.coords[1], wp.coords[2], wp.rgb[0], wp.rgb[1], wp.rgb[2], {})
     }
 }), () => { return settings.tunnelsWaypoints && dwarvenChecker.check() })
-
-
-/*register("command", (type) => {
-    waypoints.push({type, coords: [Math.floor(Player.getX()), Math.floor(Player.getY()), Math.floor(Player.getZ())]})
-    FileLib.write("Coleweight", "data/glaciteTunnels.json", JSON.stringify(waypoints))
-}).setCommandName("cwrecord")*/
