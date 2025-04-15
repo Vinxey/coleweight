@@ -29,10 +29,6 @@ register("chat", () => {
     constants.data.currentSkymall = possible_perks[4]
     constants.data.save()
 }).setCriteria(/&r&eNew buff&r&r&r: &r&fGain &r&a5x &r&9Titanium &r&fdrops&r/g)
-//god hates me
-
-
-
 
 register("chat", (skymalltext) =>{
     if (skymalltext == "aEnabled"){
