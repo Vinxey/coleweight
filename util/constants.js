@@ -199,17 +199,18 @@ register("gameLoad", () => {
 register("chat", (lvl, pet, event) => {
     constants.data.currentPet = pet.toLowerCase()
     constants.data.save()
-}).setCriteria(/&cAutopet &eequipped your &.\[Lvl ([0-9]+)] &.([a-zA-Z]+)&e! &a&lVIEW RULE&r/g)
+}).setCriteria(/&cAutopet &eequipped your &.\[Lvl ([0-9]+)] &.([a-zA-Z]+)&([0-9] ✦&e!|e!) &a&lVIEW RULE&r/g)
 
 
 register("chat", (message, pet, event) => {
     if(message == "summoned")
         constants.data.currentPet = pet.toLowerCase()
+        
     else if (message == "despawned")
         constants.data.currentPet = "N/A"
 
     constants.data.save()
-}).setCriteria(/&r&aYou ([a-zA-Z]+) your &r&.([a-zA-Z✦ ]+)&r&a!&r/g)
+}).setCriteria(/&r&aYou ([a-zA-Z]+) your &r&.([a-zA-Z]+)&r&([0-9] ✦&r&a|a)!&r/g)
 
 
 register("chat", (state, event) => {
