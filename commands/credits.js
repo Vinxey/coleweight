@@ -10,6 +10,6 @@ registerCommand({
     category: "miscellaneous",
     showInHelp: false,
     execute: (args) => {
-        ChatLib.chat(`${PREFIX}&bCW was made by Ninjune (discord: ninjune).`)
+        ChatLib.chat(`${PREFIX}&bCW is maintained by Vinxey and was made by Ninjune.`)
     }
 })
