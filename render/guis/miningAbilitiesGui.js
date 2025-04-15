@@ -107,8 +107,8 @@ register("chat", (abilityName) => {
 
 //gets cooldown from chat cause sometimes its more accurate
 register("chat", (cooldown) =>{
-    if (constants.data.currentAbility != ""){
-    addAbility(constants.data.currentAbility, cooldown)
+    if (constants.data.currentAbility != "" && cooldown != activeAbilities.timer){
+        activeAbilities.timer = cooldown
 }
 }).setCriteria(/&r&cYour pickaxe ability is on cooldown for ([0-9]+)s.&r/g)
 
