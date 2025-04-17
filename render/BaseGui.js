@@ -31,7 +31,7 @@ export class BaseGui
         });
 
         registerWhen(register("renderOverlay", () => {
-            if (this.gui.isOpen())
+            if (this.gui.isOpen() && !constants.data.guiGui)
             {
                 let txt = "Drag to move. Use +/- to increase/decrease gui size. Use arrow keys to set alignment.";
                 Renderer.drawStringWithShadow(txt, Renderer.screen.getWidth()/2 - Renderer.getStringWidth(txt)/2, Renderer.screen.getHeight()/2);
@@ -39,7 +39,7 @@ export class BaseGui
 
             let message = renderOverlayCallback();
             if(this.gui.isOpen())
-                message = `&f&os: ${constants.data[aliases[0]].scale.toFixed(2)}&r\n` + (message ?? "");
+                message = `&f&o${aliases[1]}\nScale: ${constants.data[aliases[0]].scale.toFixed(2)} X: ${constants.data[aliases[0]].x} Y: ${constants.data[aliases[0]].y}&r\n` + (message ?? "");
             let text = new Text(message ?? "");
             text.setX(constants.data[aliases[0]].x);
             text.setY(constants.data[aliases[0]].y - (this.gui.isOpen() ? 10*constants.data[aliases[0]].scale : 0)); // addition to account for "s: ..."
@@ -78,5 +78,9 @@ export class BaseGui
     open()
     {
         return this.gui.open();
+    }
+
+    close(){
+        return this.gui.close()
     }
 }

@@ -5,9 +5,15 @@ import { Title } from "../../util/helperFunctions"
 import { BaseGui } from "../BaseGui"
 
 
-const timerGui = new BaseGui(["timerGui", "timer"], () => {
-    if (!timerGui.isOpen() && constants.data.timerGui.timer <= 0 && !settings.timerEndVisible) return
-
+const timerGui = new BaseGui(["timerGui", "Timer"], () => {
+    
+    if (constants.data.guiGui){
+        let txt = "Drag to move. Use +/- to increase/decrease gui size. Use arrow keys to set alignment.";
+        Renderer.drawStringWithShadow(txt, Renderer.screen.getWidth()/2 - Renderer.getStringWidth(txt)/2, Renderer.screen.getHeight()/2);
+        return `&aTimer: &b12m 34s`
+    }
+    if (!settings.timerVisible || (!timerGui.isOpen() && constants.data.timerGui.timer <= 0 && !settings.timerEndVisible)) return ''
+    
     let timerHr = Math.floor(constants.data.timerGui.timer/60/60), message
 
     if(timerHr >= 1)
@@ -16,7 +22,7 @@ const timerGui = new BaseGui(["timerGui", "timer"], () => {
         message = `&aTimer: &b${Math.floor(constants.data.timerGui.timer/60)}m ${Math.floor(constants.data.timerGui.timer%60)}s`
 
     return message
-}, () => { return settings.timerVisible || timerGui.isOpen()})
+}, () => { return settings.timerVisible || timerGui.isOpen() || constants.data.guiGui})
 const title = new Title({text: "&bTimer done"})
 
 registerGui(timerGui)

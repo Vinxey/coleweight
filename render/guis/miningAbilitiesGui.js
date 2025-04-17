@@ -13,13 +13,12 @@ activetimer = 0
 addAbility(constants.data.currentAbility, 0)
 
 
-const miningAbilitiesGui = new BaseGui(["abilityGui", "miningabilities"], () => {
-    if(!checkAreas() || constants.data.currentAbility == ""){ // had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
-        if(miningAbilitiesGui.isOpen())
-        {
+const miningAbilitiesGui = new BaseGui(["abilityGui", "Mining Ability Cooldowns"], () => {
+    if(constants.data.guiGui){
             return `&eMining Speed Boost: &b95s\n&aActive! &7(20s)`
-        }
-            return
+    }
+    if(!checkAreas() || constants.data.currentAbility == "" || !settings.miningAbilitiesGui){ // had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
+            return ''
     }
     let message = ``
     message = `&e${activeAbilities.name}: &b${activeAbilities.timer}s\n`
@@ -27,7 +26,7 @@ const miningAbilitiesGui = new BaseGui(["abilityGui", "miningabilities"], () => 
         message += `&aActive! &7(${activetimer}s)`
     }
     return message
-}, () => { return miningAbilitiesGui.isOpen() || settings.miningAbilitiesGui})
+}, () => { return miningAbilitiesGui.isOpen() || settings.miningAbilitiesGui || constants.data.guiGui})
  
 function checkAreas()
 {

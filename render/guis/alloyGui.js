@@ -4,13 +4,14 @@ import settings from "../../settings"
 import { BaseGui } from "../BaseGui"
 import axios from "../../../axios"
 import { secondsToMessage } from "../../util/helperFunctions"
-
+import constants from "../../util/constants"
 
 var latestAlloy = -1
 var lastUpdate = -1
-const alloyGui = new BaseGui(["alloyGui", "alloy", "divanAlloy", "alloytracker"], () => {
+const alloyGui = new BaseGui(["alloyGui", "Alloy Tracker", "divanAlloy", "alloytracker"], () => {
+    if (!constants.data.guiGui && (!settings.alloyTracker ||!alloyGui.isOpen())) return ''
     return `&aLast alloy: &b${secondsToMessage((new Date().getTime()-latestAlloy)/1000)} ago`
-}, () => { return alloyGui.isOpen() || settings.alloyTracker} , reloadAlloy)
+}, () => { return alloyGui.isOpen() || settings.alloyTracker || constants.data.guiGui} , reloadAlloy)
 registerGui(alloyGui)
 
 function reloadAlloy()

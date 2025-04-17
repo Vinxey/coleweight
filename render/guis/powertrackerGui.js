@@ -12,17 +12,16 @@ let sessionRunning = false,
  seconds = 0,
  timeSinceLastGain = 0
 
-const powderGui = new BaseGui(["powdertrackerGui", "powdertracker", "powder"], () => {
-    if(!sessionRunning){
-        if (powderGui.isOpen()){
-            if (!settings.showTotals){
-            return `&aSession Chests: &b500\n&aSessionGemstone: &b28.9 K\n&aChests/hr: &b500\n&aGemstone/hr: &b28.9 K\n&aUptime: &b1hr 0m`
-            } else {
-                return `&aTotal Chests: &b500\n&aTotal Gemstone: &b28.9 K\n&aSession Chests: &b500\n&aSessionGemstone: &b28.9 K\n&aChests/hr: &b500\n&aGemstone/hr: &b28.9 K\n&aUptime: &b1hr 0m`
-            }
+const powderGui = new BaseGui(["powdertrackerGui", "Powder Tracker", "powder"], () => {
+    if (constants.data.guiGui){
+        if (!settings.showTotals){
+        return `&aSession Chests: &b500\n&aSessionGemstone: &b28.9 K\n&aChests/hr: &b500\n&aGemstone/hr: &b28.9 K\n&aUptime: &b1hr 0m`
+        } else {
+            return `&aTotal Chests: &b500\n&aTotal Gemstone: &b28.9 K\n&aSession Chests: &b500\n&aSessionGemstone: &b28.9 K\n&aChests/hr: &b500\n&aGemstone/hr: &b28.9 K\n&aUptime: &b1hr 0m`
         }
-        return
     }
+    
+    if(!sessionRunning || settings.trackerVisible)return ''
     let uptimeHr = Math.floor(seconds/60/60),
      lines = [],
      message = ""
@@ -52,7 +51,7 @@ const powderGui = new BaseGui(["powdertrackerGui", "powdertracker", "powder"], (
     })
 
     return message
-}, () => { return powderGui.isOpen() || settings.trackerVisible }, resetVars)
+}, () => { return powderGui.isOpen() || settings.trackerVisible || constants.data.guiGui}, resetVars)
 registerGui(powderGui)
 
 

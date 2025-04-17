@@ -9,15 +9,13 @@ function checkAreas()
     if(dwarvenChecker.check() || hollowsChecker.check() || mineshaftCheck.check()) return true
     return false
 }
-const skymallGui = new BaseGui(["skymallGui"], () =>
+const skymallGui = new BaseGui(["skymallGui", "Skymall Tracker"], () =>
 {
-    if (!checkAreas()){
-        if (skymallGui.isOpen()){
-            return '&bCurrent Skymall:\n&a10x chance to find Golden and Diamond Goblins'
-        }
-        return
+    if (constants.data.guiGui){
+        return '&bCurrent Skymall:\n&a10x chance to find Golden and Diamond Goblins'
     }
+    if (!checkAreas() ||!settings.skymallGui) return ''
     return `&bCurrent Skymall:\n&a${constants.data.currentSkymall}`
-}, () => {return skymallGui.isOpen() || settings.skymallGui})
+}, () => {return skymallGui.isOpen() || settings.skymallGui || constants.data.guiGui})
 
 registerGui(skymallGui)

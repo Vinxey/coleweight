@@ -15,10 +15,10 @@ thousandComms = ['Gemstone Collector','Hard Stone'] //
 thirteenComms = ['Yog','Automaton','Team Treasurite']
 
 const PREFIX = constants.PREFIX
-const commissionGui = new BaseGui(["commissionGui"], () =>
+const commissionGui = new BaseGui(["commissionGui", "Commission Tracker"], () =>
 
 {
-    if (commissionGui.isOpen()){
+    if (constants.data.guiGui){
         return `&2Commissions:\n &aScrap Collector: &b0%\n &aMineshaft Explorer: &bDone!\n &aManiac Slayer: &b4/10\n &aUmber Collector &b1185/1500`
     }
     if (!checkAreas() || !settings.commissionGui) {return}
@@ -32,7 +32,7 @@ const commissionGui = new BaseGui(["commissionGui"], () =>
     message = getcommissions()
 
     return message
-}, () => {return commissionGui.isOpen() || settings.commissionGui})
+}, () => {return commissionGui.isOpen() || settings.commissionGui || constants.data.guiGui})
 
 function checkAreas()
 {

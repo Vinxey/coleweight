@@ -35,8 +35,11 @@ resetTest()
 /*
 Gui stuff
 */
-const miningtestgui = new BaseGui(["miningtestgui"], () =>
+const miningtestgui = new BaseGui(["miningtestgui","Collection Tracker"], () =>
 {
+    if (constants.data.guiGui)return `&aObsidian/h: &b123,456,789 &7(&c-5,678&7)\n&aObsidian Gained: &b123,456 &7(&a+12,345&7)\n&aTimer: &a &b30m 0s`
+    
+    if (!settings.miningtestgui) return ''
     let timerHr = Math.floor(constants.data.miningtestgui.timer/60/60)
 
         if(timerHr >= 1)
@@ -54,7 +57,7 @@ const miningtestgui = new BaseGui(["miningtestgui"], () =>
         message = `&a${constants.data.miningtestgui.collectionName}/h: &b${addCommas(collectionPerHour)} ${collctiorPerHourLastCheckStr}\n&a${constants.data.miningtestgui.collectionName} Gained: &b${addCommas(collectionTotal)} &7(&a+ ${addCommas(collectionTotalLastCheck)}&7)\n${timer}`
 
     return message
-}, () => {return miningtestgui.isOpen() || settings.miningtestgui})
+}, () => {return miningtestgui.isOpen() || settings.miningtestgui || constants.data.guiGui},resetTest)
 registerGui(miningtestgui)
 const title = new Title({text: "&bTest Over"})
 countdownTitle = new Title({text: ``, time:500})

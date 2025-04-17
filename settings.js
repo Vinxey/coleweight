@@ -1,13 +1,13 @@
 import { @Vigilant, @ButtonProperty, @SwitchProperty, @SelectorProperty, @SliderProperty, @TextProperty, @ColorProperty, Color } from "../Vigilance/index"
 
-const SubCatCommissions = ["Change commission gui position","toggle shaft commission visibility","Percents","Commission Location Hider","Crystal Hollows","Dwarven Mines","Glacite Tunnels"]
-const SubCatCoinTracker = ["Force NPC","Change Coin Tracker Position","Gemstone Type"]
+const SubCatCommissions = ["toggle shaft commission visibility","Percents","Commission Location Hider","Crystal Hollows","Dwarven Mines","Glacite Tunnels"]
+const SubCatCoinTracker = ["Force NPC","Gemstone Type"]
 const SubCatMetalDetector = ["Alert Tools","Mute Metal Detector Sound"]
-const SubCatMiningTest = ["Test Start Countdown","Collection Tracker","Change MiningTest gui position"]
-const SubCatAbilities = ["Mining abilities","Change mining abilities position"]
-const SubCatConsumables = ["Show title when consumables expire","toggle individual consumables","toggle Fillet o' fish","toggle Cacao Truffle","toggle Pristine Potato","toggle Powder Pumpkin","Change consumables position"]
-const SubCatPowderTracker = ["Show totals","Show rates","Change Powdertracker position"]
-const SubCatTimer = ["Change timer position","Timer End Visiblity"]
+const SubCatMiningTest = ["Test Start Countdown","Collection Tracker"]
+const SubCatAbilities = ["Mining abilities"]
+const SubCatConsumables = ["Show title when consumables expire","toggle individual consumables","toggle Fillet o' fish","toggle Cacao Truffle","toggle Pristine Potato","toggle Powder Pumpkin"]
+const SubCatPowderTracker = ["Show totals","Show rates"]
+const SubCatTimer = ["Timer End Visiblity"]
 const SubCatStreamerMode = ["Block tab","Block debug","Block bossbar","Randomize lobby","Disable waypoints on death"]
 
 const SubSubCatCommissionhiders = ["Crystal Hollows","Dwarven Mines","Glacite Tunnels"]
@@ -22,7 +22,6 @@ function addDependenciesfromarray(array,dependant,obj){
 @Vigilant("Coleweight/config", "Coleweight Settings", {
     getCategoryComparator: () => (a, b) => {
         const categories = ["General","Glacite Tunnels", "Gui", "Stats", "Waypoints", "Other"];
-
         return categories.indexOf(a.name) - categories.indexOf(b.name);
     }
 })
@@ -252,6 +251,15 @@ class Settings {
     })
     oldHeatmap = false;
     // CAT Gui
+    @ButtonProperty({
+        name: "Move Gui's",
+        description: "Manage all gui positions",
+        subcategory: "",
+        category: "Gui"
+    })
+    moveGuiLocations(){
+        ChatLib.command("cw move all", true);
+    }
     // SUBCAT Alloy Tracker
     @SwitchProperty({
         name: "Alloy Tracker",
@@ -260,17 +268,6 @@ class Settings {
         category: "Gui"
     })
     alloyTracker = false;
-
-    @ButtonProperty({
-        name: "Change Alloy Tracker Position",
-        description: "Move the location of the alloy tracker.",
-        subcategory: "Alloy Tracker",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveAlloyTrackerLocation() {
-        ChatLib.command("cw move alloy", true);
-    }
     // SUBCAT Coin Tracker
     @SwitchProperty({
         name: "Coin Tracker",
@@ -287,18 +284,6 @@ class Settings {
         category: "Gui"
     })
     forceNPC = false;
-
-    @ButtonProperty({
-        name: "Change Coin Tracker Position",
-        description: "Move the location of the coin tracker.",
-        subcategory: "Coin Tracker",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveCoinTrackerLocation() {
-        ChatLib.command("cw move coin", true);
-    }
-
     @SelectorProperty({
         name: "Gemstone Type",
         description: "Sets the type of gemstones to use for coin tracker for bazaar prices.",
@@ -339,17 +324,6 @@ class Settings {
         category: "Gui"
     })
     skymallGui = false;
-
-    @ButtonProperty({
-        name: "Change skymall gui position",
-        description: "Move the location of the skymall gui.",
-        subcategory: "Skymall",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveSkymallLocation(){
-        ChatLib.command("cw move skymallgui", true);
-    }
     //SUBCAT Commission Gui
     @SwitchProperty({
         name: "Commission gui",
@@ -358,16 +332,6 @@ class Settings {
         category: "Gui"
     })
     commissionGui = false;
-    @ButtonProperty({
-        name: "Change commission gui position",
-        description: "Move the location of the commission gui.",
-        subcategory: "Commissions",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    movecommissionLocation(){
-        ChatLib.command("cw move commissiongui", true);
-    }
     @SwitchProperty({
        name: "toggle shaft commission visibility",
        description: "Makes it so that mineshaft commissions only show while in a mineshaft",
@@ -434,18 +398,6 @@ class Settings {
         category: "Gui"
     })
     collectionTracker = false
-
-    @ButtonProperty({
-        name: "Change MiningTest gui position",
-        description: "Move the location of the MiningTest gui.",
-        subcategory: "MiningTest",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveMiningTestLocation(){
-        ChatLib.command("cw move miningtestgui", true);
-    }
-
     // SUBCAT Mining Abilities
     @SwitchProperty({
         name: "Mining abilities gui",
@@ -461,17 +413,6 @@ class Settings {
         category: "Gui"
     })
     miningAbilities = false;
-
-    @ButtonProperty({
-        name: "Change mining abilities position",
-        description: "Move the location of the mining abilities gui.",
-        subcategory: "Mining Abilities",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveAbilitiesLocation() {
-        ChatLib.command("cw move miningabilities", true);
-    }
     // SUBCAT Consumables
     @SwitchProperty({ 
         name: "Consumables Gui",
@@ -522,16 +463,6 @@ class Settings {
         category: "Gui"
     })
     showPowderPumpkin = true;
-    @ButtonProperty({
-        name: "Change consumables position",
-        description: "Move the location of the consumables gui.",
-        subcategory: "Consumables",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveConsumablesLocation() {
-        ChatLib.command("cw move consumablesgui", true);
-    }
     // SUBCAT Powdertracker
     @SwitchProperty({ 
         name: "Show powdertracker",
@@ -556,17 +487,6 @@ class Settings {
         category: "Gui"
     })
     showRates = true;
-    
-    @ButtonProperty({
-        name: "Change Powdertracker position",
-        description: "Move the location of the powdertracker.",
-        subcategory: "Powdertracker",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    movePowderLocation() {
-        ChatLib.command("cw move powdertracker", true);
-    }
     // SUBCAT Scrap tracker
     @SwitchProperty({
         name: "Scrap tracker",
@@ -575,17 +495,6 @@ class Settings {
         category: "Gui"
     })
     scrapGui = false;
-
-    @ButtonProperty({
-        name: "Change Scrap tracker position",
-        description: "Move the location of the scrap tracker.",
-        subcategory: "Scrap Tracker",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveCwLocation() {
-        ChatLib.command("cw move scrap", true);
-    }
     // SUBCAT Stopwatch
     @SwitchProperty({
         name: "Stopwatch",
@@ -594,17 +503,6 @@ class Settings {
         category: "Gui"
     })
     stopwatchVisible = false;
-
-    @ButtonProperty({
-        name: "Change stopwatch position",
-        description: "Move the location of the stopwatch.",
-        subcategory: "Stopwatch",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveStopwatchLocation() {
-        ChatLib.command("cw move stopwatch", true);
-    }
     // SUBCAT Timer
     @SwitchProperty({
         name: "Timer",
@@ -613,18 +511,6 @@ class Settings {
         category: "Gui"
     })
     timerVisible = false;
-
-    @ButtonProperty({
-        name: "Change timer position",
-        description: "Move the location of the timer.",
-        subcategory: "Timer",
-        category: "Gui",
-        placeholder: "Open"
-    })
-    moveTimerLocation() {
-        ChatLib.command("cw move timer", true);
-    }
-
     @SwitchProperty({
         name: "Timer End Visiblity",
         description: "Toggles visibility of timer at 0m 0s",
@@ -812,17 +698,6 @@ class Settings {
         category: "Other"
     })
     m3timer = false;
-
-    @ButtonProperty({
-        name: "Change Fire Freeze Position",
-        description: "Move the location of the fire freeze timer.",
-        subcategory: "Dungeon",
-        category: "Other",
-        placeholder: "Open"
-    })
-    moveffLocation() {
-        ChatLib.command("cw move ff", true);
-    }
     // SUBCAT Foraging
     @SwitchProperty({
         name: "Treecap Timer",

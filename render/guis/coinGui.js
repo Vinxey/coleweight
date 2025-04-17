@@ -3,6 +3,7 @@ import settings from "../../settings";
 import { addCommas, secondsToMessage } from "../../util/helperFunctions";
 import { BaseGui } from "../BaseGui";
 import request from "../../../requestV2";
+import constants from "../../util/constants"
 // some code from soopy's version
 let money = 0;
 let startTime = -1;
@@ -15,9 +16,9 @@ let lastGemstone = "n/a";
 const gemstoneCosts = {};
 
 
-const coinGui = new BaseGui(["coinGui", "coin", "money", "cointracker"], () => {
+const coinGui = new BaseGui(["coinGui", "Gemstone Profit Tracker", "money", "cointracker"], () => {
     if(startTime <= 0)
-        if (coinGui.isOpen()){
+        if (coinGui.isOpen() || constants.data.guiGui){
             return `&a(Ruby Fine @ &b12,345&a)\n&a$/hr: &b$123,456,789\n&a$ made: &b$123,456,789&b\n&aUptime: &b1hr 00m`;
         }
         return;
@@ -43,7 +44,7 @@ const coinGui = new BaseGui(["coinGui", "coin", "money", "cointracker"], () => {
     }
 
     return `&a(${lastGemstone} ${type} @ &b${addCommas(lastPrice)}&a)\n&a$/hr: &b$${addCommas(moneyPerHour)}\n&a$ made: &b$${addCommas(Math.floor(money))}&b\n&aUptime: &b${secondsToMessage((Date.now()-startTime)/1000)}`;
-}, () => { return coinGui.isOpen() || settings.coinTracker } , resetVars);
+}, () => { return coinGui.isOpen() || settings.coinTracker ||constants.data.guiGui } , resetVars);
 registerGui(coinGui);
 
 

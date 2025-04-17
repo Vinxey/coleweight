@@ -10,8 +10,6 @@ let PogData = new PogObject("Coleweight", {
     "jungle_amulet": true,
     "first_time": true,
     "tracked": {},
-    "itemStringed": "",
-    "museum": [],
     "skymallDuringTest": [],
     "currentPet": "",
     "currentAbility":"",
@@ -22,13 +20,7 @@ let PogData = new PogObject("Coleweight", {
     "powderPumpkinExperation": 0,
     "pristinePotatoExperation": 0,
     "truffleExperation": 0,
-    "logoutTime": 0,
-    "coleweightGui": {
-        "x": 0.5,
-        "y": 141,
-        "alignment": 0,
-        "scale": 1.0
-    },
+    "guiGui": false,
     "commissionGui": {
         "x": 0.5,
         "y": 141,
@@ -61,12 +53,6 @@ let PogData = new PogObject("Coleweight", {
         "x": 0,
         "y": 0,
         "stopwatch": 0,
-        "alignment": 0,
-        "scale": 1.0
-    },
-    "downtimeGui" : {
-        "x": 0,
-        "y": 0,
         "alignment": 0,
         "scale": 1.0
     },
@@ -105,12 +91,6 @@ let PogData = new PogObject("Coleweight", {
         "alignment": 0,
         "scale": 1.0
     },
-    "gyroGui": {
-        "x": 0,
-        "y": 0,
-        "alignment": 0,
-        "scale": 1.0
-    },
     "coinGui": {
         "x": 0,
         "y": 0,
@@ -118,12 +98,6 @@ let PogData = new PogObject("Coleweight", {
         "scale": 1.0
     },
     "ffGui": {
-        "x": 0,
-        "y": 0,
-        "alignment": 0,
-        "scale": 1.0
-    },
-    "danceGui": {
         "x": 0,
         "y": 0,
         "alignment": 0,

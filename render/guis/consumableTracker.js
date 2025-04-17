@@ -5,8 +5,10 @@ import settings from "../../settings"
 
 constants.data.save()
 i = 0
-const consumablesGui = new BaseGui(["consumablesGui","consumables","consumablestracker"], ()=>{
+const consumablesGui = new BaseGui(["consumablesGui","Consumable Tracker","consumablestracker"], ()=>{
     let message = ''
+    if (constants.data.guiGui)return `&aPowder Pumpkin: &cExpired!\n&aFillet O\' Fortune: &cExpired!\n&aPristine Potato: &b19m 38s\n&aCacao Truffle: &b57m 26s`
+    if (!settings.consumablesGui)return ''
     //Powder Pumpkin
     if(settings.hideConsumables && !settings.showPowderPumpkin){
         message += ''
@@ -36,7 +38,7 @@ const consumablesGui = new BaseGui(["consumablesGui","consumables","consumablest
     }else message+= `&aCacao Truffle: &cExpired!`
 
     return message
-}, () => {return consumablesGui.isOpen()  || settings.consumablesGui})
+}, () => {return consumablesGui.isOpen()  || settings.consumablesGui||constants.data.guiGui})
 
 register('step',() =>{
     if (constants.data.powderPumpkinExperation > 0){
