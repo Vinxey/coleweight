@@ -30,8 +30,6 @@ timer = 0
 skymallDuringTest = []
 resetTest()
 
-
-
 /*
 Gui stuff
 */
@@ -46,15 +44,18 @@ const miningtestgui = new BaseGui(["miningtestgui","Collection Tracker"], () =>
                 {timer = `&aTimer: &b${timerHr}h ${Math.floor(constants.data.miningtestgui.timer/60) - timerHr*60}m`}
         else
                 {timer = `&aTimer: &b${Math.floor(constants.data.miningtestgui.timer/60)}m ${Math.floor(constants.data.miningtestgui.timer%60)}s`}
-
+        if (settings.showchanges && constants.data.miningtestgui.collectionName != "XP"){
+            collectionTotalLastCheckStr = `&7(&a+ ${addCommas(collectionTotalLastCheck)}&7)`
         if (collctiorPerHourLastCheck >= 0 ){
             collctiorPerHourLastCheckStr = `&7(&a+ ${addCommas(collctiorPerHourLastCheck)}&7)`
         } else if (collctiorPerHourLastCheck < 0){
             collctiorPerHourLastCheckStr = `&7( &c${addCommas(collctiorPerHourLastCheck)}&7 )`
         }
-
-
-        message = `&a${constants.data.miningtestgui.collectionName}/h: &b${addCommas(collectionPerHour)} ${collctiorPerHourLastCheckStr}\n&a${constants.data.miningtestgui.collectionName} Gained: &b${addCommas(collectionTotal)} &7(&a+ ${addCommas(collectionTotalLastCheck)}&7)\n${timer}`
+    } else {
+        collctiorPerHourLastCheckStr = ''
+        collectionTotalLastCheckStr = ''
+    }  
+        message = `&a${constants.data.miningtestgui.collectionName}/h: &b${addCommas(collectionPerHour)} ${collctiorPerHourLastCheckStr}\n&a${constants.data.miningtestgui.collectionName} Gained: &b${addCommas(collectionTotal)} ${collectionTotalLastCheckStr}\n${timer}`
 
     return message
 }, () => {return miningtestgui.isOpen() || settings.miningtestgui || constants.data.guiGui},resetTest)
@@ -92,8 +93,6 @@ register("step", () => {
         constants.data.miningtestgui.timer += 1
         constants.data.save()
         if (constants.data.miningtestgui.collectionName == "XP"){
-            collectionTotalLastCheck = collectionTotal - collectionTotalLastCheck
-            collctiorPerHourLastCheck = collectionPerHour - collctiorPerHourLastCheck
             collectionTotal = constants.data.miningXP - startingxp
             collectionPerHour = Math.floor(collectionTotal / ((constants.data.miningtestgui.timer) / (3600)))
         }

@@ -382,7 +382,13 @@ class Settings {
         category: "Gui"
     })
     miningtestgui = false;
-
+    @SwitchProperty({
+        name: "Show changes",
+        description: "shows how much the amount has changed by when updated",
+        subcategory: "MiningTest",
+        category: "Gui"
+    })
+    showchanges = true
     @TextProperty({
         name: "Test Start Countdown",
         description: "time in seconds before the test starts",
