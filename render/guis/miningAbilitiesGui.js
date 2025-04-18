@@ -10,6 +10,7 @@ activeAbilities = undefined
 blegg = false
 tankCooldown = 1
 activetimer = 0
+tank = ''
 addAbility(constants.data.currentAbility, 0)
 
 
