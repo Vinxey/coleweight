@@ -100,8 +100,11 @@ register("chat", (abilityName) =>{
 
 //gets ability name through "{ability} is now available" message
 register("chat", (abilityName) => {
-    constants.data.currentAbility = abilityName
-    constants.data.save()
+    if (checkAreas()){
+        constants.data.currentAbility = abilityName
+        constants.data.save()
+    }
+    
 }).setCriteria(/&r&a&r&6([a-zA-Z ]+) &r&ais now available!&r/g)
 
 
