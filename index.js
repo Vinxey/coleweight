@@ -1,5 +1,4 @@
 import "./render/naturals"
-import "./render/gemstoneMiningStats"
 import "./render/creeperWaypoints"
 import "./render/treecapTimer"
 import "./render/efficientMinerOverlayV2"
@@ -16,3 +15,4 @@ import "./chat/grieferTrack"
 import "./chat/alloyDrop"
 import "./chat/scrapEgo"
 import "./chat/Skymall"
+
