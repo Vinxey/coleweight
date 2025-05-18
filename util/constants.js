@@ -11,10 +11,10 @@ let PogData = new PogObject("Coleweight", {
     "first_time": true,
     "tracked": {},
     "skymallDuringTest": [],
+    "MineshaftMayhem": '',
     "currentPet": "",
     "currentAbility":"",
     "currentSkymall":"",
-    "effMinerEnabled": false,
     "lobbyswaps": 0,
     "fishExperation": 0,
     "powderPumpkinExperation": 0,
@@ -143,8 +143,6 @@ let PBs = new PogObject("Coleweight", {
         "Umber": 0,
 }, "config/pbs.json")
 
-
-
 const PREFIX = "&2[CW] "
 export default constants = {
     PREFIX: PREFIX,
@@ -170,6 +168,7 @@ register("gameLoad", () => {
 })
 
 
+
 register("chat", (lvl, pet, event) => {
     constants.data.currentPet = pet.toLowerCase()
     constants.data.save()
@@ -186,28 +185,9 @@ register("chat", (message, pet, event) => {
     constants.data.save()
 }).setCriteria(/&r&aYou ([a-zA-Z]+) your &r&.([a-zA-Z]+)&r&([0-9] ✦&r&a|a)!&r/g)
 
-
-register("chat", (state, event) => {
-    constants.data.effMinerEnabled = state == "Enabled"
-    constants.data.save()
-}).setCriteria(/&r&.([a-zA-Z]+) Efficient Miner&r/g)
-
-
-register("worldLoad", () => {
-    Client.scheduleTask(20, updateRegisters);
-    Client.scheduleTask(60, updateRegisters);
-})
-
-
 // ct load
 updateRegisters()
 
-// Event handler for GUI settings close.
-register("guiClosed", (event) => {
-    updateRegisters();
-});
-
-
-register("guiOpened", (event) => {
-    updateRegisters();
-});
+// RegisterUpdater every 2 secs
+register('step',()=>{updateRegisters()
+}).setDelay(2)
