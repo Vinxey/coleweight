@@ -52,20 +52,6 @@ register("command", (...args) => {
     return output
 }).setName("cw").setAliases(["coleweight"])
 
-
-/*register("command", (...args) => {
-   ChatLib.command(`cw fetchdiscord ${args[0]}`, true)
-}).setTabCompletions((args) => {
-    let players = World.getAllPlayers().map((p) => p.getName())
-    .filter((n) =>
-        n.toLowerCase().startsWith(args.length ? args[0].toLowerCase() : "")
-    )
-    .sort()
-
-    return players
-}).setName("fetchdiscord").setAliases(["fdiscord"])*/
-
-
 function findTabOutput(input, options)
 {
     let output = []
