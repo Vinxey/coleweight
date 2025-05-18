@@ -3,32 +3,35 @@ import settings from "../../settings"
 import { gtChecker, dwarvenChecker, endChecker, hollowsChecker, Title } from "../../util/helperFunctions"
 import { BaseGui } from "../BaseGui"
 import constants from "../../util/constants"
+import { registerWhen } from "../../util/helperFunctions"
 
+abilitylist = ['Mining Speed Boost'
+,'Pickobulus'
+,'Maniac Miner'
+,'Anomalous Desire'
+,'Sheer Force'
+,'Gemstone Infusion']
 
-//initializes ability from data  
-activeAbilities = undefined
+titleshown = true
 blegg = false
 tankCooldown = 1
-activetimer = 0
-tank = ''
-addAbility(constants.data.currentAbility, 0)
-
-
+start = true
+findReduction(constants.data.currentAbility)
 const miningAbilitiesGui = new BaseGui(["abilityGui", "Mining Ability Cooldowns"], () => {
     if(constants.data.guiGui){
             return `&eMining Speed Boost: &b95s\n&aActive! &7(20s)`
     }
-    if(!checkAreas() || constants.data.currentAbility == "" || !settings.miningAbilitiesGui){ // had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
+    if(!checkAreas() || constants.data.currentAbility == "" || !settings.miningAbilitiesGui){
             return ''
     }
     let message = ``
-    message = `&e${activeAbilities.name}: &b${activeAbilities.timer}s\n`
+    message = `&e${constants.data.currentAbility}: &b${cooldowntimer}s\n`
     if (activetimer > 0){
         message += `&aActive! &7(${activetimer}s)`
     }
     return message
 }, () => { return miningAbilitiesGui.isOpen() || settings.miningAbilitiesGui || constants.data.guiGui})
- 
+
 function checkAreas()
 {
     if(gtChecker.check() || dwarvenChecker.check() || hollowsChecker.check() || endChecker.check() ||dwarvenChecker.check()) return true
@@ -37,26 +40,60 @@ function checkAreas()
 
 registerGui(miningAbilitiesGui)
 
-register("step", () => {
-    if (constants.data.currentAbility != ""){// had to add currentAbility check otherwise on first time timer would just say 0 forever and give errors etc
-        if(activetimer > 0){ //check if ability is active
+let tittle = new Title({text: `&6[&3&kd&6] &b&l${constants.data.currentAbility}&6 [&3&kd&6]`})
+registerWhen(register("step", () => {
+        if(activetimer > 0){
             activetimer--
         }
-        if(activeAbilities.timer > 0)
-            activeAbilities.timer -= 1
-        else if (activeAbilities.title.drawState == 0 && settings.miningAbilities)
-            activeAbilities.title.draw()
-    }
-
-}).setDelay(1)
+        if(cooldowntimer > 0)
+            cooldowntimer -= 1
+        else if (settings.miningAbilities && cooldowntimer == 0 && !titleshown)
+            tittle.draw()
+            titleshown = true
+}).setDelay(1),()=>{return settings.miningAbilitiesGui && constants.data.currentAbility != ""})
 
 
 //gets ability through you used your {ability name} message
-register("chat", (abilityName) =>{
-    //sets timer to 0 otherwise timer becomes undefined cause javascript is awsome and idc enough to fix it properly
-    currentPick = Player.getHeldItem()
-    //do this on a seperate line as if it takes too long the item will switch when drill swapping
-    currentPick = currentPick.getLore()
+registerWhen(register("chat", (abilityName) =>{
+    //get the held item first as any delay could mess things up
+    heldPick = Player.getHeldItem()
+    constants.data.currentAbility = abilityName
+    checkDrillParts(heldPick)
+    findReduction(abilityName)
+    titleshown = false
+    constants.data.save()
+}).setCriteria(/&r&aYou used your &r&6(.+) &r&aPickaxe Ability!&r/g),()=>{return settings.miningAbilitiesGui})
+
+
+//gets ability through hotm selection
+registerWhen(register("chat", (abilityName) =>{
+    constants.data.currentAbility = abilityName
+    constants.data.save()
+}).setCriteria(/&r&aYou selected &r&e(.+) &r&aas your Pickaxe Ability\. This ability will apply to all of your pickaxes!&r/g),()=>{return settings.miningAbilitiesGui})
+
+
+//gets ability name through "{ability} is now available" message
+registerWhen(register("chat", (abilityName) => {
+    if (checkAreas() && abilitylist.includes(abilityName)){
+        constants.data.currentAbility = abilityName
+        constants.data.save()
+    }
+}).setCriteria(/&r&a&r&6([a-zA-Z ]+) &r&ais now available!&r/g),()=>{return settings.miningAbilitiesGui})
+
+
+//this is innacurate pretty often so im getting rid of it for now till i test more
+/*registerWhen(register("chat", (cooldown) =>{
+    print('a')
+    if (constants.data.currentAbility != "" && cooldown != cooldowntimer){
+        cooldowntimer = cooldown
+}
+}).setCriteria(/&r&cYour pickaxe ability is on cooldown for ([0-9]+)s\.&r/g),()=>{return settings.miningAbilitiesGui})*/
+
+
+function checkDrillParts(heldPick){
+    blegg = false
+    tank = ''
+    currentPick = heldPick.getLore()
     //find the tank and check for Omelette in held item and set cooldown reduction accordingly
     currentPick.forEach((line) => {
         if (line.includes('Tank')){
@@ -71,7 +108,7 @@ register("chat", (abilityName) =>{
             tankCooldown = .9
             break;
         case '§5§o§7§aGemstone Fuel Tank': 
-            tankCooldown = .06
+            tankCooldown = .94
             break;
         case '§5§o§7§aTitanium-Infused Fuel Tank':
             tankCooldown = .96
@@ -83,52 +120,17 @@ register("chat", (abilityName) =>{
             tankCooldown = 1
             break;
     }
-    constants.data.currentAbility = abilityName
-    constants.data.save()
-    addAbility(abilityName, 0)
-    activetimer = maxActiveTimer
-}).setCriteria(/&r&aYou used your &r&6([a-zA-Z ]+) &r&aPickaxe Ability!&r/g)
-
-
-//gets ability through hotm selection
-register("chat", (abilityName) =>{
-    constants.data.currentAbility = abilityName
-    constants.data.save()
-    addAbility(abilityName, activeAbilities.timer)
-}).setCriteria(/&r&aYou selected &r&e([a-zA-Z ]+) &r&aas your Pickaxe Ability. This ability will apply to all of your pickaxes!&r/g)
-
-
-//gets ability name through "{ability} is now available" message
-register("chat", (abilityName) => {
-    if (checkAreas()){
-        constants.data.currentAbility = abilityName
-        constants.data.save()
-    }
-    
-}).setCriteria(/&r&a&r&6([a-zA-Z ]+) &r&ais now available!&r/g)
-
-
-//gets cooldown from chat cause sometimes its more accurate
-register("chat", (cooldown) =>{
-    if (constants.data.currentAbility != "" && cooldown != activeAbilities.timer){
-        activeAbilities.timer = cooldown
 }
-}).setCriteria(/&r&cYour pickaxe ability is on cooldown for ([0-9]+)s.&r/g)
 
 
-
-function addAbility(abilityName, timer = 0)
-{
-    let found = false
-    let maxTimer
-
-    // finds cooldown and length of each ability
-    switch(constants.data.currentAbility){
+function findReduction(abilityName){
+        reduction = 1
+        switch(abilityName){
         case "Mining Speed Boost":
             if (blegg){
-                maxActiveTimer = 20
+                activetimer = 20
             } else{
-                maxActiveTimer = 15
+                activetimer = 15
             }
                 maxTimer = 120
             break;
@@ -138,7 +140,7 @@ function addAbility(abilityName, timer = 0)
             } else{
                 maxTimer = 50
             }
-            maxActiveTimer = 0
+            activetimer = 0
             break;
         case "Anomalous Desire":
             if (blegg){
@@ -146,31 +148,34 @@ function addAbility(abilityName, timer = 0)
             } else{
                 maxTimer = 110
             }
-            maxActiveTimer = 30
+            activetimer = 30
             break;
         case "Maniac Miner":
             if (blegg){
-                maxActiveTimer = 35
+                activetimer = 35
             } else{ 
-                maxActiveTimer = 30
+                activetimer = 30
             }
             maxTimer = 120
             break;
         case "Gemstone Infusion" || "Sheer Force":
             if (blegg){
-                maxActiveTimer = 30
+                activetimer = 30
             } else{
-                maxActiveTimer = 25
+                activetimer = 25
             }
             maxTimer = 120
             break;
         default:
-            maxTimer = 0
-            maxActiveTimer = 0
+                maxTimer = 0
+                activetimer = 0
             break;
         
     }
-
+    if (start){
+        activetimer = 0
+        start = false
+    }
     //checks active pet for bal
     if (constants.data.currentPet == "bal"){
         Bal = .9
@@ -184,31 +189,24 @@ function addAbility(abilityName, timer = 0)
     } else{
         Skymall = 1
     }
-
-    //if the timer has finished set the new timer based on buffs
-    if (timer <= 0) {
-
-        //calc timer based on reductions
-        timer = Math.round(maxTimer * (Bal * Skymall * tankCooldown))
-    }
-    
-    
-    //if ability is swapped change the name of the ability on the gui
-    if (activeAbilities != undefined && abilityName != activeAbilities.name){
-            found = true
-            activeAbilities.name = abilityName
-            activeAbilities.title = new Title({text: `&6[&3&kd&6] &b&l${abilityName}&6 [&3&kd&6]`})
-    }
-
-    //if this is first check apply default attributes and create object
-    if (!found)
-    {
-        let object = {timer, name: abilityName, title: new Title({text: `&6[&3&kd&6] &b&l${abilityName}&6 [&3&kd&6]`})}
-        activeAbilities = (object)
-        drawTimestamp = timer
-        activeAbilities.title.drawState = 0
-        activeAbilities.timer = timer
-    }
-    blegg = false
-    
+    reduction = Bal * Skymall * tankCooldown
+    cooldowntimer = Math.round(maxTimer * reduction)
 }
+
+/* All ability use messages
+&r&aYou used your &r&6Mining Speed Boost &r&aPickaxe Ability!&r
+&r&aYou used your &r&6Pickobulus &r&aPickaxe Ability!&r
+&r&aYou used your &r&6Maniac Miner &r&aPickaxe Ability!&r
+&r&aYou used your &r&6Anomalous Desire &r&aPickaxe Ability!&r
+&r&aYou used your &r&6Sheer Force &r&aPickaxe Ability!&r
+&r&aYou used your &r&6Gemstone Infusion &r&aPickaxe Ability!&r
+*/
+
+/*All ability swap messages
+&r&aYou selected &r&eMining Speed Boost &r&aas your Pickaxe Ability. This ability will apply to all of your pickaxes!&r
+&r&aYou selected &r&ePickobulus &r&aas your Pickaxe Ability. This ability will apply to all of your pickaxes!&r
+&r&aYou selected &r&eAnomalous Desire &r&aas your Pickaxe Ability. This ability will apply to all of your pickaxes!&r
+&r&aYou selected &r&eManiac Miner &r&aas your Pickaxe Ability. This ability will apply to all of your pickaxes!&r
+&r&aYou selected &r&eGemstone Infusion &r&aas your Pickaxe Ability. This ability will apply to all of your pickaxes!&r
+&r&aYou selected &r&eSheer Force &r&aas your Pickaxe Ability. This ability will apply to all of your pickaxes!&r
+*/
