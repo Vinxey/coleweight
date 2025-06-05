@@ -31,7 +31,7 @@ function addDependenciesfromarray(array,dependant,obj){
 class Settings {
     constructor() {
         this.initialize(this);
-        this.setCategoryDescription("General", `&aColeweight &bv${JSON.parse(FileLib.read("Coleweight", "metadata.json")).version}` + 
+        this.setCategoryDescription("General", `&aColeweight &bv${JSON.parse(FileLib.read("coleweight", "metadata.json")).version}` + 
         `\n&aBy &bNinjune`)
         addDependenciesfromarray(SubCatCommissions,"Commission gui",this)
         addDependenciesfromarray(SubCatCoinTracker,"Coin Tracker",this)
