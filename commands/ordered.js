@@ -140,9 +140,9 @@ export default registerCommand({
             case "save":
                 if(args[2] == undefined)
                     return ChatLib.chat(`${constants.PREFIX}&bUsage: /cw ordered save (name) [description, can be spaced]`)
-                let routes = JSON.parse(FileLib.read("Coleweight", "config/routes.json"))
+                let routes = JSON.parse(FileLib.read("coleweight", "config/routes.json"))
                 routes[args[2]] = {"desc": args.slice(3).join(" ") ?? "", "format": "soopy", "data": JSON.stringify(orderedWaypoints)}
-                FileLib.write("Coleweight", "config/routes.json", JSON.stringify(routes))
+                FileLib.write("coleweight", "config/routes.json", JSON.stringify(routes))
                 ChatLib.chat(`${constants.PREFIX}&bSaved. Do "/cw import" to import.`)
 
                 break

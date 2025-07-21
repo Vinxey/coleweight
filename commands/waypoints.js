@@ -107,9 +107,9 @@ export default registerCommand({
             case "save":
                 if(args[2] == undefined)
                     return ChatLib.chat(`${constants.PREFIX}&bUsage: /cw waypoint save (name) [description, can be spaced]`)
-                routes = JSON.parse(FileLib.read("Coleweight", "config/routes.json"))
+                routes = JSON.parse(FileLib.read("coleweight", "config/routes.json"))
                 routes[args[2]] = {"desc": args.slice(3).join(" ") ?? "", "format": "soopy", "data": JSON.stringify(waypoints)}
-                FileLib.write("Coleweight", "config/routes.json", JSON.stringify(routes))
+                FileLib.write("coleweight", "config/routes.json", JSON.stringify(routes))
                 ChatLib.chat(`${constants.PREFIX}&bSaved. Do "/cw import" to import.`)
                 break
             case "swap":

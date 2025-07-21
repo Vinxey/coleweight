@@ -10,8 +10,8 @@ registerCommand({
     execute: (args) => {
         if(args[1] == undefined)
             return ChatLib.chat(`${constants.PREFIX}&bUsage: /cw deleteroute (name)`)
-        let routes = JSON.parse(FileLib.read("Coleweight", "config/routes.json"))
+        let routes = JSON.parse(FileLib.read("coleweight", "config/routes.json"))
         ChatLib.chat(`${constants.PREFIX}&b${delete routes[args[1]] ? "Deleted" : "Unabled to delete"}. Do "/cw import" to see routes.`)
-        FileLib.write("Coleweight", "config/routes.json", JSON.stringify(routes))
+        FileLib.write("coleweight", "config/routes.json", JSON.stringify(routes))
     }
 })

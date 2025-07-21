@@ -4,7 +4,7 @@ import settings from "../settings"
 import { updateRegisters } from "./helperFunctions"
 
 
-let PogData = new PogObject("Coleweight", {
+let PogData = new PogObject("coleweight", {
     "professional": 0,
     "jungle_amulet": true,
     "first_time": true,
@@ -103,7 +103,7 @@ export default constants = {
     PREFIX: PREFIX,
     CALCULATEERRORMESSAGE: `${PREFIX}&cInvalid arguments. '/cw calculate help' for more information.`,
     INVALIDARGS: `${PREFIX}&cInvalid arguments. '/cw help' for more information.`,
-    VERSION: (JSON.parse(FileLib.read("Coleweight", "metadata.json"))).version,
+    VERSION: (JSON.parse(FileLib.read("coleweight", "metadata.json"))).version,
     CWINFO: undefined,
     data: PogData,
     beta: false,

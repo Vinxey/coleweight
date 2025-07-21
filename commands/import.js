@@ -11,7 +11,7 @@ registerCommand({
     options: "[route]",
     category: "miscellaneous",
     execute: (args) => {
-        let routes = JSON.parse(FileLib.read("Coleweight", "config/routes.json"))
+        let routes = JSON.parse(FileLib.read("coleweight", "config/routes.json"))
 
         if(args[1] == undefined)
         {

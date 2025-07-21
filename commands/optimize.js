@@ -17,7 +17,7 @@ registerCommand({
 
 const mainThread = new Thread(() => {
     ChatLib.chat(`${PREFIX}Working...`)
-    let routes = JSON.parse(FileLib.read("Coleweight", "../../../skytils/waypoints.json"))
+    let routes = JSON.parse(FileLib.read("coleweight", "../../../skytils/waypoints.json"))
     let route = routes.categories.find(route => route.name.toLowerCase() === args.slice(1).join(" ").toLowerCase())
     let origWaypoints = route?.waypoints
     if(origWaypoints == undefined || origWaypoints.length < 2) return ChatLib.chat(`${PREFIX}&cRoute does not exist or there is less than two waypoints.`)

@@ -276,7 +276,7 @@ export const gunpowderCheck = new LocationChecker(["§bGunpowder"])
  */
 export function deleteFile(path)
 {
-    const file = new File(Config.modulesFolder + "/Coleweight/" + path)
+    const file = new File(Config.modulesFolder + "/coleweight/" + path)
 
     if(file.exists())
         file.delete()

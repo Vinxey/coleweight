@@ -5,7 +5,7 @@ let coords = [],
 
 
 register("gameLoad", res => {
-    coords = JSON.parse(FileLib.read("Coleweight", "data/naturalCoords.json"))
+    coords = JSON.parse(FileLib.read("coleweight", "data/naturalCoords.json"))
 })
 
 

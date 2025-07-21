@@ -2,7 +2,7 @@ import settings from "../settings";
 import { dwarvenChecker, registerWhen } from "../util/helperFunctions";
 import { drawCoolWaypoint } from "../util/renderUtil"
 
-let waypoints = JSON.parse(FileLib.read("Coleweight", "data/glaciteTunnels.json"))
+let waypoints = JSON.parse(FileLib.read("coleweight", "data/glaciteTunnels.json"))
 waypoints.forEach(wp => {
     let rgb
 
@@ -35,5 +35,5 @@ registerWhen(register("renderWorld", () => {
 
 /*register("command", (type) => {
     waypoints.push({type, coords: [Math.floor(Player.getX()), Math.floor(Player.getY()), Math.floor(Player.getZ())]})
-    FileLib.write("Coleweight", "data/glaciteTunnels.json", JSON.stringify(waypoints))
+    FileLib.write("coleweight", "data/glaciteTunnels.json", JSON.stringify(waypoints))
 }).setCommandName("cwrecord")*/

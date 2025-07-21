@@ -1,6 +1,6 @@
 import { @Vigilant, @ButtonProperty, @SwitchProperty, @SelectorProperty, @SliderProperty, @TextProperty, @ColorProperty, Color } from "../Vigilance/index"
 
-@Vigilant("Coleweight/config", "Coleweight Settings", {
+@Vigilant("coleweight/config", "Coleweight Settings", {
     getCategoryComparator: () => (a, b) => {
         const categories = ["General", "Gui", "Stats", "Waypoints", "Other"];
 
